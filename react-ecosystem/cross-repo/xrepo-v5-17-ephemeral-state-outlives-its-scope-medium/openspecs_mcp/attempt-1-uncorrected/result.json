@@ -1,0 +1,587 @@
+{
+ "arm": "openspecs_mcp",
+ "case_id": "xrepo-v5-17-ephemeral-state-outlives-its-scope",
+ "case_question": "Transient visual feedback in one of these libraries outlives the thing it belongs to: the fading trail left behind by a presentation pointer keeps animating and drawing after the user has switched to a different page of the same document, because the component that owns those in-flight trails is one long-lived manager that never recorded which page each trail was started on, and nothing tears them down when the active page changes. The same shape of bug is a standing contract across the folder: short-lived state - the transient status of an in-flight fetch, a pending selection, an interaction still in progress - is owned by something that outlives the scope the state actually belongs to, and has to be reset when that scope changes underneath it. Which files own scope-bound ephemeral state of this kind and would have to change?",
+ "retrieved": 34,
+ "gold_counts": {
+  "min_repos": 9,
+  "min_files": 9
+ },
+ "gold_size": 9,
+ "gold_repo_count": 9,
+ "metrics": {
+  "recall@10": 0.1111,
+  "recall@20": 0.3333,
+  "recall@40": 0.4444,
+  "precision@5": 0.2,
+  "precision@20": 0.15,
+  "MRR": 1.0,
+  "first_hit_rank": 1,
+  "hits_at_20": "3/9",
+  "repo_recall": 0.6667,
+  "repos_found": "6/9",
+  "repos_named": 6,
+  "invalid_path_rate": 0.0
+ },
+ "prf": {
+  "full_list": {
+   "precision": 0.1176,
+   "recall": 0.4444,
+   "f1": 0.186,
+   "hits": 4,
+   "retrieved": 34,
+   "gold_size": 9
+  },
+  "@5": {
+   "precision": 0.2,
+   "recall": 0.1111,
+   "f1": 0.1429,
+   "hits": 1,
+   "retrieved": 5,
+   "gold_size": 9
+  },
+  "@10": {
+   "precision": 0.1,
+   "recall": 0.1111,
+   "f1": 0.1053,
+   "hits": 1,
+   "retrieved": 10,
+   "gold_size": 9
+  },
+  "@20": {
+   "precision": 0.15,
+   "recall": 0.3333,
+   "f1": 0.2069,
+   "hits": 3,
+   "retrieved": 20,
+   "gold_size": 9
+  }
+ },
+ "hits": [
+  "tldraw::packages/editor/src/lib/editor/managers/ScribbleManager/ScribbleManager.ts",
+  "query::packages/query-core/src/queryObserver.ts",
+  "table::packages/table-core/src/features/RowPagination.ts",
+  "xyflow::packages/react/src/store/index.ts"
+ ],
+ "ranked_detail": [
+  {
+   "rank": 1,
+   "repo": "tldraw",
+   "path": "packages/editor/src/lib/editor/managers/ScribbleManager/ScribbleManager.ts",
+   "gold": true,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 2,
+   "repo": "tldraw",
+   "path": "packages/editor/src/lib/editor/managers/ClickManager/ClickManager.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 3,
+   "repo": "tldraw",
+   "path": "packages/editor/src/lib/editor/managers/SpatialIndexManager/SpatialIndexManager.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 4,
+   "repo": "tldraw",
+   "path": "packages/editor/src/lib/editor/managers/FontManager/FontManager.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 5,
+   "repo": "tldraw",
+   "path": "packages/editor/src/lib/editor/managers/SnapManager/SnapManager.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 6,
+   "repo": "tldraw",
+   "path": "packages/editor/src/lib/editor/managers/EdgeScrollManager/EdgeScrollManager.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 7,
+   "repo": "tldraw",
+   "path": "packages/editor/src/lib/editor/managers/InputsManager/InputsManager.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 8,
+   "repo": "tldraw",
+   "path": "packages/editor/src/lib/editor/managers/PerformanceManager/PerformanceManager.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 9,
+   "repo": "tldraw",
+   "path": "packages/editor/src/lib/editor/managers/CollaboratorsManager/CollaboratorsManager.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 10,
+   "repo": "tldraw",
+   "path": "packages/editor/src/lib/editor/managers/HistoryManager/HistoryManager.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 11,
+   "repo": "tldraw",
+   "path": "packages/tldraw/src/lib/tools/LaserTool/LaserTool.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 12,
+   "repo": "query",
+   "path": "packages/query-core/src/queryObserver.ts",
+   "gold": true,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 13,
+   "repo": "query",
+   "path": "packages/query-core/src/query.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 14,
+   "repo": "query",
+   "path": "packages/query-core/src/mutationObserver.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 15,
+   "repo": "query",
+   "path": "packages/query-core/src/infiniteQueryObserver.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 16,
+   "repo": "query",
+   "path": "packages/query-core/src/queriesObserver.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 17,
+   "repo": "table",
+   "path": "packages/table-core/src/features/RowSelection.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 18,
+   "repo": "table",
+   "path": "packages/table-core/src/features/ColumnSizing.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 19,
+   "repo": "table",
+   "path": "packages/table-core/src/features/RowExpanding.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 20,
+   "repo": "table",
+   "path": "packages/table-core/src/features/RowPagination.ts",
+   "gold": true,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 21,
+   "repo": "table",
+   "path": "packages/table-core/src/core/table.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 22,
+   "repo": "db",
+   "path": "packages/db/src/query/subset-dedupe.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 23,
+   "repo": "db",
+   "path": "packages/db/src/collection/subscription.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 24,
+   "repo": "db",
+   "path": "packages/db/src/query/live/collection-subscriber.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 25,
+   "repo": "db",
+   "path": "packages/db/src/collection/lifecycle.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 26,
+   "repo": "db",
+   "path": "packages/react-db/src/useLiveSuspenseQuery.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 27,
+   "repo": "xyflow",
+   "path": "packages/react/src/store/index.ts",
+   "gold": true,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 28,
+   "repo": "xyflow",
+   "path": "packages/system/src/xyhandle/XYHandle.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 29,
+   "repo": "xyflow",
+   "path": "packages/svelte/src/lib/store/index.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 30,
+   "repo": "xyflow",
+   "path": "packages/system/src/xydrag/XYDrag.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 31,
+   "repo": "redux-toolkit",
+   "path": "packages/toolkit/src/query/core/buildSlice.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 32,
+   "repo": "redux-toolkit",
+   "path": "packages/toolkit/src/query/core/buildMiddleware/cacheCollection.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 33,
+   "repo": "redux-toolkit",
+   "path": "packages/toolkit/src/query/core/buildInitiate.ts",
+   "gold": false,
+   "exists_at_pin": true
+  },
+  {
+   "rank": 34,
+   "repo": "redux-toolkit",
+   "path": "packages/toolkit/src/query/core/buildMiddleware/polling.ts",
+   "gold": false,
+   "exists_at_pin": true
+  }
+ ],
+ "invalid_paths": [],
+ "missed_gold": [
+  "redux-toolkit::packages/toolkit/src/query/react/buildHooks.ts",
+  "db::packages/react-db/src/useLiveQuery.ts",
+  "react::packages/react-reconciler/src/ReactFiberHooks.js",
+  "jotai::src/react/useAtomValue.ts",
+  "zustand::src/middleware/persist.ts"
+ ],
+ "index_ceiling": {
+  "gold_repos_not_indexed_at_pin": [],
+  "gold_paths_out_of_index": [],
+  "reachable_gold_size": 9,
+  "max_attainable_recall": 1.0,
+  "note": "Gold living in a repository the graph does not carry at the pinned commit is unreachable BY THIS ARM'S SURFACE. It is still counted in recall against the full gold set - the headline metrics are unadjusted - but max_attainable_recall states the ceiling the index imposed."
+ },
+ "retriever": {
+  "surface": "Opus 5 + openspecs-index knowledge-graph MCP. No filesystem, no checkout, no WebSearch/WebFetch, no subagents.",
+  "repo_pins": {
+   "redux": "3aa561f9fc13f3287e6d83764f85fe0e82437c5f",
+   "redux-toolkit": "b1c5130154c454ca8387f55da6122fcb507c560c",
+   "react-redux": "ad5d1e0816d0cb1464b25cf2853f2a7d73433f5b",
+   "reselect": "8d87c27b75f55883629be75d1eae1c27832d907a",
+   "redux-thunk": "184205d49f707c6f203269e0d39ad85824801816",
+   "react": "3a717e42438afac81020cdec297dadb5613a4304",
+   "jotai": "5c4ca26b0db5571114be58393e17854a771f7790",
+   "zustand": "beca84e600e4e250f6b244d22878e72948f331c7",
+   "db": "7f0fa36ff6d48b0494ed5f6a1223fd18c317e41f",
+   "xyflow": "360f5b13e2bc6899ea06b4be1a49b068d86926cf",
+   "query": "46d7f02f1c7b9fcd3255082cc7103e8bfa3dab76",
+   "table": "d08af367e11c539bb7e18c2472aa761149ef6db6",
+   "tldraw": "5590d14d8edd4faab7dc1177b6e1adb28876fd23",
+   "redux-devtools": "f4b4668c30ae08920c59a76cc4629c35c16ef0fa"
+  },
+  "checkout_verified": "N/A - this arm has no checkout. run.sh gates instead on preflight.py, which probes the file tier at every pinned commit and writes index_coverage.json before launch.",
+  "isolation": "kernel-enforced by sandbox-exec: gold, the answer vault, every sibling arm AND all fourteen checkouts are unreadable; no prior-run transcript is readable; fresh cwd outside the benchmark tree; --safe-mode",
+  "surface_pure": true
+ },
+ "cost": {
+  "session_id": "3b57b3ab-bdde-4307-b6cd-b3cf1a6ac584",
+  "arm": "openspecs_mcp",
+  "case": "xrepo-v5-17-ephemeral-state-outlives-its-scope",
+  "model": [
+   "claude-haiku-4-5-20251001",
+   "claude-opus-5"
+  ],
+  "launch": "fresh isolated `claude -p` under sandbox-exec, DISABLE_PROMPT_CACHING=1, --safe-mode, --strict-mcp-config with openspecs-index only, MCP tools allowlisted and every filesystem/network/subagent tool denied",
+  "price_per_mtok_usd": {
+   "input": 5.0,
+   "output": 25.0,
+   "cache_write": 10.0,
+   "cache_read": 0.5
+  },
+  "usd_per_query_cli": 8.419102,
+  "usd_per_query_list_price": 8.41617,
+  "duration_ms": 624512,
+  "wall_seconds": 630,
+  "num_turns": 23,
+  "tokens": {
+   "input": 1598189,
+   "output": 17009,
+   "cache_creation": 0,
+   "cache_read": 0
+  },
+  "tokens_retrieved": 83011,
+  "cache_clean": true,
+  "tool_calls": {
+   "ToolSearch": 1,
+   "mcp__openspecs-index__roll_call": 1,
+   "mcp__openspecs-index__stakeout": 14,
+   "mcp__openspecs-index__case_file": 1,
+   "mcp__openspecs-index__the_receipts": 5
+  },
+  "mcp_tool_calls": {
+   "mcp__openspecs-index__roll_call": 1,
+   "mcp__openspecs-index__stakeout": 14,
+   "mcp__openspecs-index__case_file": 1,
+   "mcp__openspecs-index__the_receipts": 5
+  },
+  "schema_loader_calls": {
+   "ToolSearch": 1
+  },
+  "disallowed_tool_calls": {},
+  "surface_pure": true,
+  "surface_pure_note": "Arm surface is Opus 5 with the openspecs-index MCP server and nothing else. The fourteen checkouts are denied by the sandbox, so a filesystem tool would have returned EPERM even had one been allowed; the tool allowlist means none was. ToolSearch is excluded from the purity test: it loads MCP tool SCHEMAS and has no read access to anything. Any other non-MCP tool counts as a surface violation.",
+  "index_coverage": {
+   "mcp_url": "http://localhost/mcp",
+   "probe_query": "module",
+   "repos_covered_at_pin": 13,
+   "roster_size": 14,
+   "coverage": {
+    "redux": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "c0c638c58b7d1844702ea4c7f14c62db",
+     "newest_indexed_commit": "3084fc33bb23ab4cab4796172eafe342da4e73d9",
+     "indexed_commit_count": 3,
+     "last_indexed_at": "2026-08-01T17:01:16.742Z"
+    },
+    "redux-toolkit": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "5129210f7edc89d624231a57a3b76770",
+     "newest_indexed_commit": "b1c5130154c454ca8387f55da6122fcb507c560c",
+     "indexed_commit_count": 2,
+     "last_indexed_at": "2026-08-01T21:59:12.540Z"
+    },
+    "react-redux": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "874bb764335b006f6e1f2df028475246",
+     "newest_indexed_commit": "ad5d1e0816d0cb1464b25cf2853f2a7d73433f5b",
+     "indexed_commit_count": 2,
+     "last_indexed_at": "2026-08-03T23:57:35.759Z"
+    },
+    "reselect": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "6441bad69fdf49c97f726d5ea467c1f8",
+     "newest_indexed_commit": "8d87c27b75f55883629be75d1eae1c27832d907a",
+     "indexed_commit_count": 2,
+     "last_indexed_at": "2026-08-01T17:59:37.715Z"
+    },
+    "redux-thunk": {
+     "in_graph": false,
+     "pinned_commit_indexed": false,
+     "knowledgeId": null,
+     "newest_indexed_commit": null
+    },
+    "react": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9",
+     "newest_indexed_commit": "1d4758e0f6aae560024b36ce07ed8a67b3f7d78f",
+     "indexed_commit_count": 2,
+     "last_indexed_at": "2026-08-05T19:17:17.797Z"
+    },
+    "jotai": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "581a242e-3f4c-45db-8e84-c69cf159ac44",
+     "newest_indexed_commit": "5c4ca26b0db5571114be58393e17854a771f7790",
+     "indexed_commit_count": 1,
+     "last_indexed_at": "2026-07-17T19:14:48.020Z"
+    },
+    "zustand": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99",
+     "newest_indexed_commit": "beca84e600e4e250f6b244d22878e72948f331c7",
+     "indexed_commit_count": 2,
+     "last_indexed_at": "2026-09-06T15:25:20.523Z"
+    },
+    "db": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "659659a1-0515-4ae1-92a9-1961c8c10abe",
+     "newest_indexed_commit": "7f0fa36ff6d48b0494ed5f6a1223fd18c317e41f",
+     "indexed_commit_count": 1,
+     "last_indexed_at": "2026-07-17T16:27:44.116Z"
+    },
+    "xyflow": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "6f1f2a40-aa51-4fe1-b9d2-d33ee4571368",
+     "newest_indexed_commit": "360f5b13e2bc6899ea06b4be1a49b068d86926cf",
+     "indexed_commit_count": 1,
+     "last_indexed_at": "2026-08-03T07:41:16.819Z"
+    },
+    "query": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431",
+     "newest_indexed_commit": "46d7f02f1c7b9fcd3255082cc7103e8bfa3dab76",
+     "indexed_commit_count": 5,
+     "last_indexed_at": "2026-08-05T01:13:09.731Z"
+    },
+    "table": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "08e0b828-ac04-4dce-8e73-eb2ceb151072",
+     "newest_indexed_commit": "50feff8584d48972329d2d2b5795e152cf522178",
+     "indexed_commit_count": 3,
+     "last_indexed_at": "2026-08-06T06:25:14.869Z"
+    },
+    "tldraw": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "91b23c56-1aee-5c86-a34b-c66f8970d025",
+     "newest_indexed_commit": "5590d14d8edd4faab7dc1177b6e1adb28876fd23",
+     "indexed_commit_count": 1,
+     "last_indexed_at": "2026-08-24T12:40:55.890Z"
+    },
+    "redux-devtools": {
+     "in_graph": true,
+     "pinned_commit_indexed": true,
+     "knowledgeId": "2d9528990f33c5f5e3ee7442fbfe04a4",
+     "newest_indexed_commit": "f4b4668c30ae08920c59a76cc4629c35c16ef0fa",
+     "indexed_commit_count": 5,
+     "last_indexed_at": "2026-08-05T00:15:24.694Z"
+    }
+   }
+  },
+  "coverage_audit": {
+   "per_repo": {
+    "db": {
+     "queried": true,
+     "in_answer": true
+    },
+    "jotai": {
+     "queried": true,
+     "in_answer": false
+    },
+    "query": {
+     "queried": true,
+     "in_answer": true
+    },
+    "react": {
+     "queried": false,
+     "in_answer": false
+    },
+    "react-redux": {
+     "queried": true,
+     "in_answer": false
+    },
+    "redux": {
+     "queried": false,
+     "in_answer": false
+    },
+    "redux-devtools": {
+     "queried": true,
+     "in_answer": false
+    },
+    "redux-toolkit": {
+     "queried": true,
+     "in_answer": true
+    },
+    "reselect": {
+     "queried": false,
+     "in_answer": false
+    },
+    "table": {
+     "queried": true,
+     "in_answer": true
+    },
+    "tldraw": {
+     "queried": true,
+     "in_answer": true
+    },
+    "xyflow": {
+     "queried": true,
+     "in_answer": true
+    },
+    "zustand": {
+     "queried": false,
+     "in_answer": false
+    }
+   },
+   "unverified_exclusions": [
+    "react",
+    "redux",
+    "reselect",
+    "zustand"
+   ],
+   "included_without_query": [],
+   "note": "Derived from tool-call ARGUMENTS in the transcript, not from the model's own account of what it searched. unverified_exclusions are reachable roster repos that got no scoped call AND are absent from the answer - the exact bug this arm's first run had (react and zustand, both gold, were never queried while the final message claimed they returned nothing). It must be empty. included_without_query is the inverse check: a repo named in the answer that was never queried would mean paths invented rather than retrieved."
+  },
+  "sandbox": {
+   "mechanism": "sandbox-exec (macOS seatbelt), profile pinned at sandbox.sb",
+   "gold_readable": false,
+   "checkouts_readable": false,
+   "other_arms_readable": false,
+   "transcripts_readable": false,
+   "filesystem_paths_attempted": {},
+   "reads_refused_by_kernel": 0,
+   "contamination_possible": false,
+   "note": "The benchmark tree is denied wholesale with NO re-allow, so golden.json, DONOTREADTHISFOLDER/, every sibling arm's results AND all fourteen repository checkouts fail with EPERM. run.sh gates on that: it refuses to launch unless a sandboxed cat of golden.json and a sandboxed ls of each of the fourteen repos both fail. ~/.claude/projects is denied too, so no earlier session transcript - nor this run's own - is readable. cwd was a fresh empty directory outside the benchmark tree and --safe-mode dropped CLAUDE.md, skills, plugins, hooks and auto-memory. Network is open because the MCP server is the surface and speaks HTTP; purity is enforced by the tool allowlist and audited here."
+  },
+  "transcript": "/Users/sauravverma/.claude/projects/-private-tmp-xrepo-v5-runs-mcp-xrepo-v5-17-ephemeral-state-outlives-its-scope/3b57b3ab-bdde-4307-b6cd-b3cf1a6ac584.jsonl",
+  "prompt_caching": "DISABLED (DISABLE_PROMPT_CACHING=1) - cold-cache figure"
+ },
+ "comparable": true
+}

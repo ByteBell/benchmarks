@@ -1,0 +1,243 @@
+{
+ "session_id": "3b57b3ab-bdde-4307-b6cd-b3cf1a6ac584",
+ "arm": "openspecs_mcp",
+ "case": "xrepo-v5-17-ephemeral-state-outlives-its-scope",
+ "model": [
+  "claude-haiku-4-5-20251001",
+  "claude-opus-5"
+ ],
+ "launch": "fresh isolated `claude -p` under sandbox-exec, DISABLE_PROMPT_CACHING=1, --safe-mode, --strict-mcp-config with openspecs-index only, MCP tools allowlisted and every filesystem/network/subagent tool denied",
+ "price_per_mtok_usd": {
+  "input": 5.0,
+  "output": 25.0,
+  "cache_write": 10.0,
+  "cache_read": 0.5
+ },
+ "usd_per_query_cli": 8.419102,
+ "usd_per_query_list_price": 8.41617,
+ "duration_ms": 624512,
+ "wall_seconds": 630,
+ "num_turns": 23,
+ "tokens": {
+  "input": 1598189,
+  "output": 17009,
+  "cache_creation": 0,
+  "cache_read": 0
+ },
+ "tokens_retrieved": 83011,
+ "cache_clean": true,
+ "tool_calls": {
+  "ToolSearch": 1,
+  "mcp__openspecs-index__roll_call": 1,
+  "mcp__openspecs-index__stakeout": 14,
+  "mcp__openspecs-index__case_file": 1,
+  "mcp__openspecs-index__the_receipts": 5
+ },
+ "mcp_tool_calls": {
+  "mcp__openspecs-index__roll_call": 1,
+  "mcp__openspecs-index__stakeout": 14,
+  "mcp__openspecs-index__case_file": 1,
+  "mcp__openspecs-index__the_receipts": 5
+ },
+ "schema_loader_calls": {
+  "ToolSearch": 1
+ },
+ "disallowed_tool_calls": {},
+ "surface_pure": true,
+ "surface_pure_note": "Arm surface is Opus 5 with the openspecs-index MCP server and nothing else. The fourteen checkouts are denied by the sandbox, so a filesystem tool would have returned EPERM even had one been allowed; the tool allowlist means none was. ToolSearch is excluded from the purity test: it loads MCP tool SCHEMAS and has no read access to anything. Any other non-MCP tool counts as a surface violation.",
+ "index_coverage": {
+  "mcp_url": "http://localhost/mcp",
+  "probe_query": "module",
+  "repos_covered_at_pin": 13,
+  "roster_size": 14,
+  "coverage": {
+   "redux": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "c0c638c58b7d1844702ea4c7f14c62db",
+    "newest_indexed_commit": "3084fc33bb23ab4cab4796172eafe342da4e73d9",
+    "indexed_commit_count": 3,
+    "last_indexed_at": "2026-08-01T17:01:16.742Z"
+   },
+   "redux-toolkit": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "5129210f7edc89d624231a57a3b76770",
+    "newest_indexed_commit": "b1c5130154c454ca8387f55da6122fcb507c560c",
+    "indexed_commit_count": 2,
+    "last_indexed_at": "2026-08-01T21:59:12.540Z"
+   },
+   "react-redux": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "874bb764335b006f6e1f2df028475246",
+    "newest_indexed_commit": "ad5d1e0816d0cb1464b25cf2853f2a7d73433f5b",
+    "indexed_commit_count": 2,
+    "last_indexed_at": "2026-08-03T23:57:35.759Z"
+   },
+   "reselect": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "6441bad69fdf49c97f726d5ea467c1f8",
+    "newest_indexed_commit": "8d87c27b75f55883629be75d1eae1c27832d907a",
+    "indexed_commit_count": 2,
+    "last_indexed_at": "2026-08-01T17:59:37.715Z"
+   },
+   "redux-thunk": {
+    "in_graph": false,
+    "pinned_commit_indexed": false,
+    "knowledgeId": null,
+    "newest_indexed_commit": null
+   },
+   "react": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9",
+    "newest_indexed_commit": "1d4758e0f6aae560024b36ce07ed8a67b3f7d78f",
+    "indexed_commit_count": 2,
+    "last_indexed_at": "2026-08-05T19:17:17.797Z"
+   },
+   "jotai": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "581a242e-3f4c-45db-8e84-c69cf159ac44",
+    "newest_indexed_commit": "5c4ca26b0db5571114be58393e17854a771f7790",
+    "indexed_commit_count": 1,
+    "last_indexed_at": "2026-07-17T19:14:48.020Z"
+   },
+   "zustand": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99",
+    "newest_indexed_commit": "beca84e600e4e250f6b244d22878e72948f331c7",
+    "indexed_commit_count": 2,
+    "last_indexed_at": "2026-09-06T15:25:20.523Z"
+   },
+   "db": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "659659a1-0515-4ae1-92a9-1961c8c10abe",
+    "newest_indexed_commit": "7f0fa36ff6d48b0494ed5f6a1223fd18c317e41f",
+    "indexed_commit_count": 1,
+    "last_indexed_at": "2026-07-17T16:27:44.116Z"
+   },
+   "xyflow": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "6f1f2a40-aa51-4fe1-b9d2-d33ee4571368",
+    "newest_indexed_commit": "360f5b13e2bc6899ea06b4be1a49b068d86926cf",
+    "indexed_commit_count": 1,
+    "last_indexed_at": "2026-08-03T07:41:16.819Z"
+   },
+   "query": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431",
+    "newest_indexed_commit": "46d7f02f1c7b9fcd3255082cc7103e8bfa3dab76",
+    "indexed_commit_count": 5,
+    "last_indexed_at": "2026-08-05T01:13:09.731Z"
+   },
+   "table": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "08e0b828-ac04-4dce-8e73-eb2ceb151072",
+    "newest_indexed_commit": "50feff8584d48972329d2d2b5795e152cf522178",
+    "indexed_commit_count": 3,
+    "last_indexed_at": "2026-08-06T06:25:14.869Z"
+   },
+   "tldraw": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "91b23c56-1aee-5c86-a34b-c66f8970d025",
+    "newest_indexed_commit": "5590d14d8edd4faab7dc1177b6e1adb28876fd23",
+    "indexed_commit_count": 1,
+    "last_indexed_at": "2026-08-24T12:40:55.890Z"
+   },
+   "redux-devtools": {
+    "in_graph": true,
+    "pinned_commit_indexed": true,
+    "knowledgeId": "2d9528990f33c5f5e3ee7442fbfe04a4",
+    "newest_indexed_commit": "f4b4668c30ae08920c59a76cc4629c35c16ef0fa",
+    "indexed_commit_count": 5,
+    "last_indexed_at": "2026-08-05T00:15:24.694Z"
+   }
+  }
+ },
+ "coverage_audit": {
+  "per_repo": {
+   "db": {
+    "queried": true,
+    "in_answer": true
+   },
+   "jotai": {
+    "queried": true,
+    "in_answer": false
+   },
+   "query": {
+    "queried": true,
+    "in_answer": true
+   },
+   "react": {
+    "queried": false,
+    "in_answer": false
+   },
+   "react-redux": {
+    "queried": true,
+    "in_answer": false
+   },
+   "redux": {
+    "queried": false,
+    "in_answer": false
+   },
+   "redux-devtools": {
+    "queried": true,
+    "in_answer": false
+   },
+   "redux-toolkit": {
+    "queried": true,
+    "in_answer": true
+   },
+   "reselect": {
+    "queried": false,
+    "in_answer": false
+   },
+   "table": {
+    "queried": true,
+    "in_answer": true
+   },
+   "tldraw": {
+    "queried": true,
+    "in_answer": true
+   },
+   "xyflow": {
+    "queried": true,
+    "in_answer": true
+   },
+   "zustand": {
+    "queried": false,
+    "in_answer": false
+   }
+  },
+  "unverified_exclusions": [
+   "react",
+   "redux",
+   "reselect",
+   "zustand"
+  ],
+  "included_without_query": [],
+  "note": "Derived from tool-call ARGUMENTS in the transcript, not from the model's own account of what it searched. unverified_exclusions are reachable roster repos that got no scoped call AND are absent from the answer - the exact bug this arm's first run had (react and zustand, both gold, were never queried while the final message claimed they returned nothing). It must be empty. included_without_query is the inverse check: a repo named in the answer that was never queried would mean paths invented rather than retrieved."
+ },
+ "sandbox": {
+  "mechanism": "sandbox-exec (macOS seatbelt), profile pinned at sandbox.sb",
+  "gold_readable": false,
+  "checkouts_readable": false,
+  "other_arms_readable": false,
+  "transcripts_readable": false,
+  "filesystem_paths_attempted": {},
+  "reads_refused_by_kernel": 0,
+  "contamination_possible": false,
+  "note": "The benchmark tree is denied wholesale with NO re-allow, so golden.json, DONOTREADTHISFOLDER/, every sibling arm's results AND all fourteen repository checkouts fail with EPERM. run.sh gates on that: it refuses to launch unless a sandboxed cat of golden.json and a sandboxed ls of each of the fourteen repos both fail. ~/.claude/projects is denied too, so no earlier session transcript - nor this run's own - is readable. cwd was a fresh empty directory outside the benchmark tree and --safe-mode dropped CLAUDE.md, skills, plugins, hooks and auto-memory. Network is open because the MCP server is the surface and speaks HTTP; purity is enforced by the tool allowlist and audited here."
+ },
+ "transcript": "/Users/sauravverma/.claude/projects/-private-tmp-xrepo-v5-runs-mcp-xrepo-v5-17-ephemeral-state-outlives-its-scope/3b57b3ab-bdde-4307-b6cd-b3cf1a6ac584.jsonl",
+ "prompt_caching": "DISABLED (DISABLE_PROMPT_CACHING=1) - cold-cache figure"
+}

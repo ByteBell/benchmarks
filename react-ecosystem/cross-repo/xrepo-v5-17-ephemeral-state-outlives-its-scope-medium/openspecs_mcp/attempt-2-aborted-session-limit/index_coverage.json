@@ -1,0 +1,118 @@
+{
+ "mcp_url": "http://localhost/mcp",
+ "probe_query": "module",
+ "repos_covered_at_pin": 13,
+ "roster_size": 14,
+ "coverage": {
+  "redux": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "c0c638c58b7d1844702ea4c7f14c62db",
+   "newest_indexed_commit": "3084fc33bb23ab4cab4796172eafe342da4e73d9",
+   "indexed_commit_count": 3,
+   "last_indexed_at": "2026-08-01T17:01:16.742Z"
+  },
+  "redux-toolkit": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "5129210f7edc89d624231a57a3b76770",
+   "newest_indexed_commit": "b1c5130154c454ca8387f55da6122fcb507c560c",
+   "indexed_commit_count": 2,
+   "last_indexed_at": "2026-08-01T21:59:12.540Z"
+  },
+  "react-redux": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "874bb764335b006f6e1f2df028475246",
+   "newest_indexed_commit": "ad5d1e0816d0cb1464b25cf2853f2a7d73433f5b",
+   "indexed_commit_count": 2,
+   "last_indexed_at": "2026-08-03T23:57:35.759Z"
+  },
+  "reselect": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "6441bad69fdf49c97f726d5ea467c1f8",
+   "newest_indexed_commit": "8d87c27b75f55883629be75d1eae1c27832d907a",
+   "indexed_commit_count": 2,
+   "last_indexed_at": "2026-08-01T17:59:37.715Z"
+  },
+  "redux-thunk": {
+   "in_graph": false,
+   "pinned_commit_indexed": false,
+   "knowledgeId": null,
+   "newest_indexed_commit": null
+  },
+  "react": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9",
+   "newest_indexed_commit": "1d4758e0f6aae560024b36ce07ed8a67b3f7d78f",
+   "indexed_commit_count": 2,
+   "last_indexed_at": "2026-08-05T19:17:17.797Z"
+  },
+  "jotai": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "581a242e-3f4c-45db-8e84-c69cf159ac44",
+   "newest_indexed_commit": "5c4ca26b0db5571114be58393e17854a771f7790",
+   "indexed_commit_count": 1,
+   "last_indexed_at": "2026-07-17T19:14:48.020Z"
+  },
+  "zustand": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99",
+   "newest_indexed_commit": "beca84e600e4e250f6b244d22878e72948f331c7",
+   "indexed_commit_count": 2,
+   "last_indexed_at": "2026-09-06T15:25:20.523Z"
+  },
+  "db": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "659659a1-0515-4ae1-92a9-1961c8c10abe",
+   "newest_indexed_commit": "7f0fa36ff6d48b0494ed5f6a1223fd18c317e41f",
+   "indexed_commit_count": 1,
+   "last_indexed_at": "2026-07-17T16:27:44.116Z"
+  },
+  "xyflow": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "6f1f2a40-aa51-4fe1-b9d2-d33ee4571368",
+   "newest_indexed_commit": "360f5b13e2bc6899ea06b4be1a49b068d86926cf",
+   "indexed_commit_count": 1,
+   "last_indexed_at": "2026-08-03T07:41:16.819Z"
+  },
+  "query": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431",
+   "newest_indexed_commit": "46d7f02f1c7b9fcd3255082cc7103e8bfa3dab76",
+   "indexed_commit_count": 5,
+   "last_indexed_at": "2026-08-05T01:13:09.731Z"
+  },
+  "table": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "08e0b828-ac04-4dce-8e73-eb2ceb151072",
+   "newest_indexed_commit": "50feff8584d48972329d2d2b5795e152cf522178",
+   "indexed_commit_count": 3,
+   "last_indexed_at": "2026-08-06T06:25:14.869Z"
+  },
+  "tldraw": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "91b23c56-1aee-5c86-a34b-c66f8970d025",
+   "newest_indexed_commit": "5590d14d8edd4faab7dc1177b6e1adb28876fd23",
+   "indexed_commit_count": 1,
+   "last_indexed_at": "2026-08-24T12:40:55.890Z"
+  },
+  "redux-devtools": {
+   "in_graph": true,
+   "pinned_commit_indexed": true,
+   "knowledgeId": "2d9528990f33c5f5e3ee7442fbfe04a4",
+   "newest_indexed_commit": "f4b4668c30ae08920c59a76cc4629c35c16ef0fa",
+   "indexed_commit_count": 5,
+   "last_indexed_at": "2026-08-05T00:15:24.694Z"
+  }
+ }
+}

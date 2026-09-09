@@ -76,6 +76,35 @@ json.dump(ranked, open(f'{case}/{arm}/ranked.json', 'w'), indent=1)
 # commands.log is what the scorer's surface gate reads. Built from the session
 # transcript, never from the agent's account of what it called: on 2026-09-09 an arm
 # self-reported `stakeout: 2, shakedown: 3` having actually run `0` and `6`.
+
+
+def _trim(inp, cap=400):
+    """Serialize a tool's input, bounded, WITHOUT breaking the JSON.
+
+    score_arm.py's fold probe json.loads() this blob to recover `relativePath` and
+    `lens`. A blind `json.dumps(inp)[:cap]` cuts mid-string, the parse fails, the probe
+    falls back to `args = {}`, and the call still counts in tool_counts while
+    contributing no seed. Every collateral_damage call carries a long `reason`, so in
+    practice EVERY fold read as `cd_calls: 0` — a run that folded correctly was scored
+    as one that never folded. Trim the long free-text values instead and re-serialize,
+    so the object always parses.
+    """
+    out, blob = dict(inp), json.dumps(inp)
+    if len(blob) <= cap:
+        return blob
+    if isinstance(out.get('reason'), str):
+        out['reason'] = out['reason'][:80] + '...'
+    for k, v in list(out.items()):
+        if isinstance(v, list) and len(v) > 6:
+            out[k] = v[:6] + [f'...+{len(v) - 6} more']
+        elif isinstance(v, str) and len(v) > 200 and k != 'relativePath':
+            out[k] = v[:200] + '...'
+    blob = json.dumps(out)
+    # Still oversized: drop free text rather than emit an unparseable line.
+    if len(blob) > cap:
+        out.pop('reason', None)
+        blob = json.dumps(out)
+    return blob
 sid = d.get('session_id')
 calls, counts = [], collections.Counter()
 for root, _, fs in os.walk(os.path.expanduser('~/.claude/projects')):
@@ -88,7 +117,7 @@ for root, _, fs in os.walk(os.path.expanduser('~/.claude/projects')):
                 for b in ct:
                     if isinstance(b, dict) and b.get('type') == 'tool_use':
                         counts[b['name']] += 1
-                        calls.append((b['name'], json.dumps(b.get('input', {}))[:400]))
+                        calls.append((b['name'], _trim(b.get('input', {}))))
 with open(f'{case}/{arm}/commands.log', 'w') as fh:
     for i, (name, inp) in enumerate(calls, 1):
         fh.write(f'{i:02d}. {name} {inp}\n')

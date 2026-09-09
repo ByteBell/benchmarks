@@ -51,8 +51,17 @@ def extract(res):
         if ch == '[':
             try: arr, _ = dec.raw_decode(s[i:])
             except ValueError: continue
-            # a list of paths, not the [0] of an index expression in the prose
-            if arr and all(isinstance(x, str) for x in arr):
+            if not arr:
+                continue
+            # Cross-repo: [{"repo": ..., "files": [...]}]. Kept in THAT shape — flattening
+            # drops the repo qualification the scorer joins gold on, and skipping this case
+            # is worse than failing: the scan then reaches the first inner "files" array and
+            # returns one repo's paths as if they were the whole answer. That silently turned
+            # a 13-path/4-repo answer into 4 tldraw paths and scored it 0.0 on 2026-09-09.
+            if all(isinstance(x, dict) and 'repo' in x and 'files' in x for x in arr):
+                return None, arr
+            # Single-repo: a flat list of paths, not the [0] of an index expression in prose
+            if all(isinstance(x, str) for x in arr):
                 return None, arr
     return None, None
 

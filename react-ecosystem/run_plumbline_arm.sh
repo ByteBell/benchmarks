@@ -81,7 +81,10 @@ ALLOW=$(printf "mcp__plumbline__%s," "${T[@]}"); ALLOW=${ALLOW%,}
 ALLOW="$ALLOW,Write"   # the prompt requires commands.log / output.log / raw_response.json
 # Write is the ONLY non-MCP tool granted. Read/Grep/Glob stay denied: they would let the
 # arm answer off the checkout, which is the failure this whole gate exists to catch.
-DENY="Bash,Read,Edit,Grep,Glob,WebFetch,WebSearch,Task,NotebookEdit,BashOutput,KillShell"
+# Monitor runs arbitrary shell, so it belongs here beside Bash: on 2026-09-09 an arm called it
+# to build its own cost.json and was stopped only because --allowedTools is a whitelist, not
+# because this list anticipated it. Loosen the whitelist and it is an open door to the checkout.
+DENY="Bash,Monitor,Read,Edit,Grep,Glob,WebFetch,WebSearch,Task,NotebookEdit,BashOutput,KillShell"
 
 ST=$(date +%s)
 ( cd "$CASE" && claude -p "$(cat "$OLDPWD/$PROMPT")" \

@@ -1,0 +1,48 @@
+01. ToolSearch {"query": "select:mcp__graphify__graph_stats,mcp__graphify__query_graph,mcp__graphify__get_node,mcp__graphify__get_neighbors,mcp__graphify__shortest_path", "max_results": 10}
+02. ToolSearch {"query": "select:mcp__graphify__god_nodes,mcp__graphify__get_community,mcp__graphify__list_prs,mcp__graphify__get_pr_impact", "max_results": 10}
+03. mcp__graphify__graph_stats {}
+04. mcp__graphify__query_graph {"question": "hideBranding cal.com branding email", "depth": 2, "token_budget": 3000}
+05. mcp__graphify__query_graph {"question": "hideBranding", "depth": 1, "token_budget": 3000}
+06. mcp__graphify__get_neighbors {"label": "shouldHideBrandingForEvent()", "token_budget": 3000}
+07. mcp__graphify__get_node {"label": "getHideBranding()"}
+08. mcp__graphify__get_neighbors {"label": "getHideBranding()", "token_budget": 2000}
+09. mcp__graphify__query_graph {"question": "sendEmailVerificationByCode verification code email booking", "depth": 2, "token_budget": 2500}
+10. mcp__graphify__get_node {"label": "AttendeeVerifyEmail"}
+11. mcp__graphify__query_graph {"question": "BaseEmailHtml email branding footer powered by Cal.com", "depth": 2, "token_budget": 2500}
+12. mcp__graphify__get_neighbors {"label": "EmailBodyLogo()", "token_budget": 2000}
+13. mcp__graphify__get_neighbors {"label": "BaseEmailHtml.tsx", "token_budget": 3000}
+14. mcp__graphify__get_neighbors {"label": "src/components/index.ts", "token_budget": 3000}
+15. mcp__graphify__query_graph {"question": "AttendeeScheduledEmail OrganizerScheduledEmail template BaseScheduledEmail", "depth": 1, "token_budget": 3000}
+16. mcp__graphify__get_neighbors {"label": "BaseScheduledEmail()", "token_budget": 2500}
+17. mcp__graphify__get_neighbors {"label": "VerifyEmailByCode.tsx", "token_budget": 2000}
+18. mcp__graphify__get_neighbors {"label": "sendEmailVerificationByCode()", "token_budget": 2000}
+19. mcp__graphify__get_neighbors {"label": "packages/emails/templates/attendee-verify-email.ts", "token_budget": 2000}
+20. mcp__graphify__get_neighbors {"label": "packages/features/profile/lib/getBranding.ts", "token_budget": 2500}
+21. mcp__graphify__get_neighbors {"label": "shouldHideBrandingForEventUsingProfile()", "token_budget": 2000}
+22. mcp__graphify__query_graph {"question": "handleNewBooking hideBranding eventType owner team calendar event", "depth": 1, "token_budget": 2500}
+23. mcp__graphify__query_graph {"question": "getEventTypesFromDB handleNewBooking eventType select hideBranding", "depth": 1, "token_budget": 2500}
+24. mcp__graphify__get_neighbors {"label": "EmailWorkflowService.ts", "token_budget": 3000}
+25. mcp__graphify__query_graph {"question": "email-manager sendScheduledEmails sendAttendeeRequestEmail booking confirmation", "depth": 1, "token_budget": 2000}
+26. mcp__graphify__query_graph {"question": "emailReminderTemplate smsReminderTemplate hideBranding isBrandingDisabled workflow reminder", "depth": 1, "token_budget": 2500}
+27. mcp__graphify__get_neighbors {"label": "payment.tsx", "token_budget": 2500}
+28. mcp__graphify__get_neighbors {"label": "packages/features/ee/payments/pages/payment.tsx", "token_budget": 2000}
+29. mcp__graphify__get_neighbors {"label": "PoweredByCal()", "token_budget": 2000}
+30. mcp__graphify__query_graph {"question": "Branding", "depth": 1, "token_budget": 1500}
+31. mcp__graphify__get_neighbors {"label": "packages/emails/src/types/email-types.ts", "token_budget": 2500}
+32. mcp__graphify__get_neighbors {"label": "types/email-types.ts", "token_budget": 2500}
+33. mcp__graphify__get_neighbors {"label": "auth-email-service.ts", "token_budget": 2000}
+34. mcp__graphify__get_neighbors {"label": "packages/features/ee/workflows/lib/reminders/templates/emailReminderTemplate.ts", "token_budget": 2000}
+35. mcp__graphify__get_neighbors {"label": "packages/features/ee/workflows/lib/service/WorkflowService.ts", "token_budget": 3000}
+36. mcp__graphify__get_neighbors {"label": "reminderScheduler.ts", "token_budget": 3000}
+37. mcp__graphify__get_neighbors {"label": "verifyEmail.ts", "token_budget": 2500}
+38. mcp__graphify__get_neighbors {"label": "emailReminderManager.ts", "token_budget": 2500}
+39. mcp__graphify__get_neighbors {"label": "sendVerifyEmailCode.handler.ts", "token_budget": 2000}
+40. mcp__graphify__query_graph {"question": "useVerifyEmail VerifyCodeDialog sendVerificationCode booker email verification", "depth": 1, "token_budget": 2000}
+41. mcp__graphify__get_neighbors {"label": "sendVerifyEmailCode.schema.ts", "token_budget": 1500}
+42. mcp__graphify__get_neighbors {"label": ".shouldHideBranding()", "token_budget": 2000}
+43. mcp__graphify__get_neighbors {"label": "EmailWorkflowService", "token_budget": 2500}
+44. mcp__graphify__get_neighbors {"label": "packages/features/ee/workflows/api/scheduleEmailReminders.ts", "token_budget": 3000}
+45. mcp__graphify__get_neighbors {"label": "handlePaymentSuccess.ts", "token_budget": 2500}
+46. mcp__graphify__get_neighbors {"label": "packages/emails/templates/_base-email.ts", "token_budget": 2000}
+47. mcp__graphify__get_neighbors {"label": "V2BaseEmailHtml.tsx", "token_budget": 1500}
+48. mcp__graphify__get_neighbors {"label": "smsReminderManager.ts", "token_budget": 2000, "relation_filter": "contains"}

@@ -1,0 +1,31 @@
+01. ToolSearch {"query": "select:mcp__graphify__graph_stats,mcp__graphify__query_graph,mcp__graphify__get_node,mcp__graphify__get_neighbors,mcp__graphify__shortest_path", "max_results": 10}
+02. ToolSearch {"query": "select:mcp__graphify__god_nodes,mcp__graphify__get_community,mcp__graphify__list_prs,mcp__graphify__get_pr_impact", "max_results": 10}
+03. mcp__graphify__graph_stats {}
+04. mcp__graphify__query_graph {"question": "restriction schedule booker timezone useBookerTimezone restrictionScheduleId", "depth": 3, "token_budget": 3000}
+05. mcp__graphify__query_graph {"question": "useSlots schedule query timezone Booker", "depth": 3, "token_budget": 3000}
+06. mcp__graphify__query_graph {"question": "useSchedule hook trpc slots getSchedule input timeZone", "depth": 2, "token_budget": 3000}
+07. mcp__graphify__get_node {"label": "useSlots()"}
+08. mcp__graphify__get_neighbors {"label": "apps/web/modules/schedules/hooks/useSchedule.ts", "token_budget": 2500}
+09. mcp__graphify__query_graph {"question": "useAvailableSlots platform atoms booker wrapper available slots hook", "depth": 2, "token_budget": 3000}
+10. mcp__graphify__query_graph {"question": "getAvailableSlots handler restriction schedule useBookerTimezone timeZone input", "depth": 2, "token_budget": 3500}
+11. mcp__graphify__get_neighbors {"label": "packages/platform/atoms/hooks/useAvailableSlots.ts", "token_budget": 2000}
+12. mcp__graphify__query_graph {"question": "restriction schedule availability service getAvailableSlots use booker timezone", "depth": 1, "token_budget": 3000, "context_filter": ["call"]}
+13. mcp__graphify__get_neighbors {"label": "packages/trpc/server/routers/viewer/slots/types.ts", "token_budget": 2000}
+14. mcp__graphify__get_neighbors {"label": "apps/web/modules/bookings/hooks/useSlots.ts", "token_budget": 2000}
+15. mcp__graphify__get_neighbors {"label": "packages/features/schedules/hooks/useTimesForSchedule.ts", "token_budget": 2000}
+16. mcp__graphify__get_neighbors {"label": "packages/platform/atoms/booker/BookerPlatformWrapper.tsx", "token_budget": 3000}
+17. mcp__graphify__get_neighbors {"label": "packages/features/schedules/hooks/useTimesForSchedule.timezone.test.ts", "token_budget": 1500}
+18. mcp__graphify__get_neighbors {"label": "useSchedule()", "token_budget": 1500}
+19. mcp__graphify__query_graph {"question": "useScheduleForEvent timePreferences useTimePreferences booker timezone store", "depth": 2, "token_budget": 2500}
+20. mcp__graphify__get_neighbors {"label": "apps/web/modules/schedules/hooks/useApiV2AvailableSlots.ts", "token_budget": 1500}
+21. mcp__graphify__get_neighbors {"label": "packages/platform/atoms/calendar-view/EventTypeCalendarViewComponent.tsx", "token_budget": 2500}
+22. mcp__graphify__get_node {"label": "GetAvailableSlotsInput_2024_04_15"}
+23. mcp__graphify__query_graph {"question": "slots-2024-04-15 controller service getAvailableSlots timeZone", "depth": 2, "token_budget": 2500}
+24. mcp__graphify__query_graph {"question": "timezone select change setTimezone booker EventMeta TimezoneSelect", "depth": 2, "token_budget": 2500}
+25. mcp__graphify__get_neighbors {"label": "packages/features/bookings/Booker/hooks/useBookerTime.ts", "token_budget": 1500}
+26. mcp__graphify__get_neighbors {"label": "packages/platform/atoms/hooks/useAvailableTimeSlots.ts", "token_budget": 1200}
+27. mcp__graphify__get_neighbors {"label": "packages/platform/types/slots/slots-2024-04-15/inputs/index.ts", "token_budget": 1500}
+28. mcp__graphify__get_node {"label": "packages/platform/atoms/hooks/useSlots.ts"}
+29. mcp__graphify__get_node {"label": "apps/web/modules/bookings/components/BookerWebWrapper.tsx"}
+30. mcp__graphify__get_neighbors {"label": "atoms/hooks/useSlots.ts", "token_budget": 1200}
+31. mcp__graphify__get_neighbors {"label": "BookerWebWrapper.tsx", "token_budget": 1500}

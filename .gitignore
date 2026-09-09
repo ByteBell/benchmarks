@@ -40,3 +40,7 @@ eval_do_not_touch/
 # with build_index_percommit.py. The meta.json records the exact commit, so a
 # missing index is a rebuild, never lost information.
 react-ecosystem/cal.com.processed/*/_turbovec/
+
+# Per-commit graphify graphs: ~60MB each, rebuildable with the extract step of
+# prep_case.sh. The arm mcp_graphify.json records the path it was built at.
+react-ecosystem/cal.com.processed/*/graphify/

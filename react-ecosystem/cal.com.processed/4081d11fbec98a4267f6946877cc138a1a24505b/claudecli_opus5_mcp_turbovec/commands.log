@@ -1,0 +1,40 @@
+01. ToolSearch {"query": "select:mcp__turbovector__search,mcp__turbovector__get_file,mcp__turbovector__read_lines,mcp__turbovector__index_info", "max_results": 4}
+02. mcp__turbovector__index_info {}
+03. mcp__turbovector__search {"query": "hideBranding remove Cal.com branding from emails", "k": 15}
+04. mcp__turbovector__search {"query": "hideBranding team event type profile branding", "k": 15}
+05. mcp__turbovector__get_file {"path": "packages/features/profile/lib/hideBranding.ts"}
+06. mcp__turbovector__search {"query": "hideBranding passed to calEvent when sending booking confirmation email", "k": 15}
+07. mcp__turbovector__search {"query": "hideBranding property on CalendarEvent type definition", "k": 15}
+08. mcp__turbovector__search {"query": "send verification code email before booking attendee verify code", "k": 15}
+09. mcp__turbovector__search {"query": "hideLogo prop BaseScheduledEmail EmailBodyLogo", "k": 15}
+10. mcp__turbovector__search {"query": "sendAttendeeVerifyEmail verification code email booker", "k": 15}
+11. mcp__turbovector__get_file {"path": "packages/features/auth/lib/verifyEmail.ts"}
+12. mcp__turbovector__search {"query": "handlePaymentSuccess send payment success booking email", "k": 15}
+13. mcp__turbovector__search {"query": "shouldHideBrandingForEvent import usage isBrandingHidden", "k": 20}
+14. mcp__turbovector__search {"query": "sendEmailVerificationCode AttendeeVerifyEmail template auth-email-service", "k": 15}
+15. mcp__turbovector__get_file {"path": "packages/trpc/server/routers/viewer/auth/sendVerifyEmailCode.handler.ts"}
+16. mcp__turbovector__get_file {"path": "packages/emails/templates/attendee-verify-email.ts"}
+17. mcp__turbovector__search {"query": "VerifyEmailByCode template component verification code email body", "k": 10}
+18. mcp__turbovector__search {"query": "EmailVerifyCode type isVerifyingEmail verificationEmailCode email-types", "k": 10}
+19. mcp__turbovector__get_file {"path": "packages/features/bookings/lib/payment/getBooking.ts"}
+20. mcp__turbovector__search {"query": "useVerifyEmail sendVerifyEmailCode mutation booker email verification hook web", "k": 12}
+21. mcp__turbovector__search {"query": "interface CalendarEvent hideOrganizerEmail platformClientId types Calendar", "k": 12}
+22. mcp__turbovector__search {"query": "trpc.viewer.auth.sendVerifyEmailCode.useMutation booker verify email dialog", "k": 12}
+23. mcp__turbovector__read_lines {"path": "packages/types/Calendar.d.ts", "start": 150, "end": 250}
+24. mcp__turbovector__search {"query": "shouldHideBranding platformClientId userId teamId EmailWorkflowService", "k": 12}
+25. mcp__turbovector__search {"query": "getEventTypesFromDB select owner hideBranding team parent hideBranding booking", "k": 15}
+26. mcp__turbovector__search {"query": "BaseScheduledEmail hideLogo platformClientId AttendeeScheduledEmail props", "k": 15}
+27. mcp__turbovector__search {"query": "hideBranding: !!eventType.owner?.hideBranding || !!platformClientId", "k": 20}
+28. mcp__turbovector__search {"query": "scheduleMandatoryReminder hideBranding workflows", "k": 12}
+29. mcp__turbovector__search {"query": "hideBranding: !!eventType?.owner?.hideBranding round robin reassignment scheduleWorkflowReminders", "k": 20}
+30. mcp__turbovector__search {"query": "handleConfirmation scheduleWorkflowReminders hideBranding booking confirmed", "k": 15}
+31. mcp__turbovector__search {"query": "scheduleSMSReminders shouldHideBranding booking eventType team hideBranding user hideBranding", "k": 15}
+32. mcp__turbovector__search {"query": "roundRobinReassignment scheduleWorkflowReminders hideBranding eventType owner", "k": 12}
+33. mcp__turbovector__read_lines {"path": "packages/features/bookings/lib/handleNewBooking/getEventTypesFromDB.ts", "start": 1, "end": 140}
+34. mcp__turbovector__search {"query": "CalendarEventBuilder withEventType hideCalendarNotes hideOrganizerEmail build event", "k": 10}
+35. mcp__turbovector__search {"query": "smsReminderTemplate isBrandingDisabled scheduleSMSReminders sent via Cal.com", "k": 15}
+36. mcp__turbovector__search {"query": "emailReminderTemplate isBrandingDisabled powered by Cal.com footer", "k": 15}
+37. mcp__turbovector__get_file {"path": "packages/features/ee/workflows/lib/reminders/scheduleMandatoryReminder.ts"}
+38. mcp__turbovector__get_file {"path": "packages/trpc/server/routers/viewer/auth/sendVerifyEmailCode.schema.ts"}
+39. mcp__turbovector__get_file {"path": "apps/web/modules/bookings/hooks/useVerifyEmail.ts"}
+40. mcp__turbovector__search {"query": "AttendeeAwaitingPaymentEmail awaiting payment email template hideLogo", "k": 12}

@@ -1,0 +1,23 @@
+01. ToolSearch {"query": "select:mcp__turbovector__search,mcp__turbovector__get_file,mcp__turbovector__read_lines,mcp__turbovector__index_info", "max_results": 5}
+02. mcp__turbovector__index_info {}
+03. mcp__turbovector__search {"query": "restriction schedule for event type booked in booker timezone useBookerTimezone", "k": 15}
+04. mcp__turbovector__search {"query": "restrictionScheduleId event type restrict booking times to a schedule", "k": 15}
+05. mcp__turbovector__search {"query": "useSchedule hook fetch available slots timeZone query input", "k": 15}
+06. mcp__turbovector__search {"query": "useSlots platform atoms booker fetch slots hook queryKey", "k": 15}
+07. mcp__turbovector__get_file {"path": "apps/web/modules/schedules/hooks/useSchedule.ts"}
+08. mcp__turbovector__get_file {"path": "packages/platform/atoms/hooks/useAvailableSlots.ts"}
+09. mcp__turbovector__get_file {"path": "apps/web/modules/schedules/hooks/useApiV2AvailableSlots.ts"}
+10. mcp__turbovector__search {"query": "cache key for available slots server side caching getSchedule cached", "k": 12}
+11. mcp__turbovector__get_file {"path": "apps/web/modules/schedules/hooks/useEvent.ts"}
+12. mcp__turbovector__read_lines {"path": "packages/trpc/server/routers/viewer/slots/util.ts", "start": 60, "end": 130}
+13. mcp__turbovector__search {"query": "useAvailableSlots({ usernameList, eventTypeId, startTime, endTime, timeZone, enabled }) BookerPlatformWrapper schedule", "k": 12}
+14. mcp__turbovector__search {"query": "useAvailableTimeSlots booker hook slots for selected date timezone", "k": 12}
+15. mcp__turbovector__search {"query": "export const QUERY_KEY = \"get-available-slots\"", "k": 15}
+16. mcp__turbovector__search {"query": "queryKey rest.startTime rest.endTime rest.eventTypeId rest.eventTypeSlug isTeamEvent teamId usernameList", "k": 15}
+17. mcp__turbovector__read_lines {"path": "packages/platform/atoms/booker/BookerPlatformWrapper.tsx", "start": 230, "end": 340}
+18. mcp__turbovector__search {"query": "useAvailableTimeSlots Booker hooks slots for date derived from schedule data", "k": 10}
+19. mcp__turbovector__get_file {"path": "packages/platform/types/slots/slots-2024-04-15/inputs/index.ts", "max_lines": 200}
+20. mcp__turbovector__search {"query": "useApiV2AvailableSlots test queryKey refetch when timezone changes vitest renderHook", "k": 12}
+21. mcp__turbovector__search {"query": "useSchedule.test.ts mock trpc getSchedule useQuery input assertions", "k": 12}
+22. mcp__turbovector__get_file {"path": "packages/features/bookings/Booker/hooks/useBookerTime.ts", "max_lines": 60}
+23. mcp__turbovector__search {"query": "setTimezone timezone select on change booker store update refetch slots", "k": 12}

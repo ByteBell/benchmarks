@@ -1,0 +1,42 @@
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# OS / editor / tooling state
+.DS_Store
+.vscode/
+.idea/
+.claude/
+.commit-date-cache/
+
+# Local symlink to private dependency (knowledge-stack)
+/src
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Generated pipeline cache (40GB — repo checkouts, level trees, per-commit
+# analysis output produced by the V2 GitHub pipeline)
+.data/
+
+# Migrated copies of public OSS repos (2.3GB — regenerate with migrate_repos.ts)
+datasets/kubernetes/
+
+# SWE-rebench task pool (38MB — regenerate with fetch_swe_rebench.py).
+# repos_and_commits.json (small) stays tracked; only the large tasks.json is ignored.
+evaluation/swe_rebench/tasks.json
+
+# SWE-bench-Pro dataset + GOLD ANSWERS vault — never commit. eval_do_not_touch/
+# holds the gold patches (answer key) and full dataset; agents must not read it.
+# Regenerate the gold-free split with eval/split_gold.py.
+eval_do_not_touch/
+
+
+# Per-commit turbovec vector indexes: ~85MB each, rebuildable from the checkout
+# with build_index_percommit.py. The meta.json records the exact commit, so a
+# missing index is a rebuild, never lost information.
+react-ecosystem/cal.com.processed/*/_turbovec/

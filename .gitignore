@@ -44,3 +44,7 @@ react-ecosystem/cal.com.processed/*/_turbovec/
 # Per-commit graphify graphs: ~60MB each, rebuildable with the extract step of
 # prep_case.sh. The arm mcp_graphify.json records the path it was built at.
 react-ecosystem/cal.com.processed/*/graphify/
+
+# Spec-site pages fetched from the S3 mirror by _tools/specsite_s3.ts. Pure cache,
+# keyed by <knowledgeId>/<commit>; re-downloadable and large (16MB+ per rebuild).
+react-ecosystem/cross-repo/_specsite_cache/

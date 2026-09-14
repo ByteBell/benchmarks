@@ -1,0 +1,120 @@
+{
+  "description": "Test fixtures for the knowledge VS Code extension. Each repo is checked out (detached HEAD) at the exact commit it was indexed at. knowledgeId matches the on-disk artifact tree, the Neo4j graph, and the Mongo `knowledge` document. `branch` is the upstream branch the pinned commit belongs to (verified via git).",
+  "org": {
+    "orgId": "ed442f8a-86da-43b8-9940-20abc14bc615",
+    "orgName": "saurav verma"
+  },
+  "mongo": {
+    "server": "bytebell-db-nlb-34e5f19cf038397f.elb.us-east-1.amazonaws.com:27008",
+    "knowledgeDatabase": "knowledge",
+    "collection": "knowledge"
+  },
+  "knowledgeIdScheme": "md5(\"owner/repo\") for bench/IR-runner repos; MiMo-Code is a UUID (added via the product add-repo flow)",
+  "repos": [
+    {
+      "dir": "MiMo-Code",
+      "repo": "XiaomiMiMo/MiMo-Code",
+      "repoUrl": "https://github.com/XiaomiMiMo/MiMo-Code.git",
+      "branch": "dev",
+      "commit": "5aed13a08ea5dd08eb1437950d53a9d6d5a37753",
+      "knowledgeId": "3310cadc-a301-4a11-b226-ce64748947a1"
+    },
+    {
+      "dir": "react",
+      "repo": "facebook/react",
+      "repoUrl": "https://github.com/facebook/react.git",
+      "branch": "main",
+      "commit": "e71a6393e66b0d2add46ba2b2c5db563a0563828",
+      "knowledgeId": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9"
+    },
+    {
+      "dir": "redux",
+      "repo": "reduxjs/redux",
+      "repoUrl": "https://github.com/reduxjs/redux.git",
+      "branch": "master",
+      "commit": "5d65348e26635b6ec627b1030732ed38797e88e9",
+      "knowledgeId": "c0c638c58b7d1844702ea4c7f14c62db"
+    },
+    {
+      "dir": "redux-toolkit",
+      "repo": "reduxjs/redux-toolkit",
+      "repoUrl": "https://github.com/reduxjs/redux-toolkit.git",
+      "branch": "master",
+      "commit": "62d21b0e5d9dd6abec10d4971be25d9c4f0424ff",
+      "knowledgeId": "5129210f7edc89d624231a57a3b76770"
+    },
+    {
+      "dir": "react-redux",
+      "repo": "reduxjs/react-redux",
+      "repoUrl": "https://github.com/reduxjs/react-redux.git",
+      "branch": "master",
+      "commit": "c089964ac61a6e967656084bcfa69b4ea38ba787",
+      "knowledgeId": "874bb764335b006f6e1f2df028475246"
+    },
+    {
+      "dir": "redux-devtools",
+      "repo": "reduxjs/redux-devtools",
+      "repoUrl": "https://github.com/reduxjs/redux-devtools.git",
+      "branch": null,
+      "commit": "4b1d1d6dbfd79caa28f29b3684cd649a4028652f",
+      "knowledgeId": "2d9528990f33c5f5e3ee7442fbfe04a4",
+      "note": "not present on disk; branch unverified"
+    },
+    {
+      "dir": "redux-thunk",
+      "repo": "reduxjs/redux-thunk",
+      "repoUrl": "https://github.com/reduxjs/redux-thunk.git",
+      "branch": "master",
+      "commit": "184205d49f707c6f203269e0d39ad85824801816",
+      "knowledgeId": "d4803d2763e3433edc5c92f7d7619c03"
+    },
+    {
+      "dir": "reselect",
+      "repo": "reduxjs/reselect",
+      "repoUrl": "https://github.com/reduxjs/reselect.git",
+      "branch": "master",
+      "commit": "950112a328f71d97d18fd543159d6fdefa432b38",
+      "knowledgeId": "2d8056b4-75b0-5442-b99d-b9762703683b"
+    },
+    {
+      "dir": "jotai",
+      "repo": "pmndrs/jotai",
+      "repoUrl": "https://github.com/pmndrs/jotai.git",
+      "branch": "main",
+      "commit": "5c4ca26b0db5571114be58393e17854a771f7790",
+      "knowledgeId": "581a242e-3f4c-45db-8e84-c69cf159ac44"
+    },
+    {
+      "dir": "zustand",
+      "repo": "pmndrs/zustand",
+      "repoUrl": "https://github.com/pmndrs/zustand.git",
+      "branch": "main",
+      "commit": "beca84e600e4e250f6b244d22878e72948f331c7",
+      "knowledgeId": "a35fa13f-a5bb-4566-a036-3fb64903d0e8"
+    },
+    {
+      "dir": "db",
+      "repo": "TanStack/db",
+      "repoUrl": "https://github.com/TanStack/db.git",
+      "branch": "main",
+      "commit": "7f0fa36ff6d48b0494ed5f6a1223fd18c317e41f",
+      "knowledgeId": "659659a1-0515-4ae1-92a9-1961c8c10abe"
+    },
+    {
+      "dir": "table",
+      "repo": "TanStack/table",
+      "repoUrl": "https://github.com/TanStack/table.git",
+      "branch": "main",
+      "commit": "d08af367e11c539bb7e18c2472aa761149ef6db6",
+      "knowledgeId": "08e0b828-ac04-4dce-8e73-eb2ceb151072"
+    },
+    {
+      "dir": "query",
+      "repo": "TanStack/query",
+      "repoUrl": "https://github.com/TanStack/query.git",
+      "branch": "main",
+      "commit": "75b2d101f02ffc9deefce7aedf3596d9c2cb3167",
+      "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431"
+    }
+  ]
+}

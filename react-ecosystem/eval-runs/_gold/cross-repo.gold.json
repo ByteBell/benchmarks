@@ -1,0 +1,1032 @@
+{
+  "description": "Fifth eval set (v5) for the knowledge VS Code extension: 14 blast-radius engineering tasks that are provably cross-repository (every case requires >=3 repos) AND grep-resistant. Uses ONLY repositories present on disk (react, redux, redux-toolkit, react-redux, reselect, redux-thunk, jotai, zustand, db, xyflow, query, table); MiMo-Code is on disk but excluded (not reactive-ecosystem). v5 = the 10 v4 cases re-verified against current disk (all pinned commits unchanged) with three classes of fixes — (1) every redux-toolkit path corrected to the real monorepo location packages/toolkit/src/... (all 11 v4 RTK paths were broken on disk), (2) stale-by-move files replaced (db collection notification loop moved to collection/changes.ts; jotai store.ts is now a facade over internals.ts), (3) genuinely-required files from the query/table repos (cloned 2026-07-30, after v4 authoring) added to the expected sets — plus 4 NEW cases centered on query and table coupling. Each item's `expected` lists the minimum set of repos/files a correct change must touch. Every listed file path was re-verified against the on-disk checkout at the pinned commits in `repoVersions`. knowledgeId = md5(\"owner/repo\").",
+  "org": {
+    "orgId": "ed442f8a-86da-43b8-9940-20abc14bc615",
+    "orgName": "saurav verma"
+  },
+  "knowledgeIds": {
+    "redux": "c0c638c58b7d1844702ea4c7f14c62db",
+    "redux-toolkit": "5129210f7edc89d624231a57a3b76770",
+    "react-redux": "874bb764335b006f6e1f2df028475246",
+    "reselect": "2d8056b4-75b0-5442-b99d-b9762703683b",
+    "react": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9",
+    "jotai": "581a242e-3f4c-45db-8e84-c69cf159ac44",
+    "zustand": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99",
+    "db": "659659a1-0515-4ae1-92a9-1961c8c10abe",
+    "xyflow": "6f1f2a40-aa51-4fe1-b9d2-d33ee4571368",
+    "query": "0c574639-1088-4233-a793-3a4397e6c431",
+    "table": "08e0b828-ac04-4dce-8e73-eb2ceb151072"
+  },
+  "repoVersions": {
+    "redux": {
+      "branch": "master",
+      "commit": "3aa561f9fc13f3287e6d83764f85fe0e82437c5f",
+      "knowledgeId": "c0c638c58b7d1844702ea4c7f14c62db"
+    },
+    "redux-toolkit": {
+      "branch": "master",
+      "commit": "b1c5130154c454ca8387f55da6122fcb507c560c",
+      "knowledgeId": "5129210f7edc89d624231a57a3b76770"
+    },
+    "react-redux": {
+      "branch": "master",
+      "commit": "ad5d1e0816d0cb1464b25cf2853f2a7d73433f5b",
+      "knowledgeId": "874bb764335b006f6e1f2df028475246"
+    },
+    "reselect": {
+      "branch": "master",
+      "commit": "8d87c27b75f55883629be75d1eae1c27832d907a",
+      "knowledgeId": "2d8056b4-75b0-5442-b99d-b9762703683b"
+    },
+    "react": {
+      "branch": "main",
+      "commit": "3a717e42438afac81020cdec297dadb5613a4304",
+      "knowledgeId": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9"
+    },
+    "jotai": {
+      "branch": "main",
+      "commit": "5c4ca26b0db5571114be58393e17854a771f7790",
+      "knowledgeId": "581a242e-3f4c-45db-8e84-c69cf159ac44"
+    },
+    "zustand": {
+      "branch": "main",
+      "commit": "beca84e600e4e250f6b244d22878e72948f331c7",
+      "knowledgeId": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99"
+    },
+    "db": {
+      "branch": "main",
+      "commit": "7f0fa36ff6d48b0494ed5f6a1223fd18c317e41f",
+      "knowledgeId": "659659a1-0515-4ae1-92a9-1961c8c10abe"
+    },
+    "xyflow": {
+      "branch": "main",
+      "commit": "360f5b13e2bc6899ea06b4be1a49b068d86926cf",
+      "knowledgeId": "6f1f2a40-aa51-4fe1-b9d2-d33ee4571368"
+    },
+    "query": {
+      "branch": "main",
+      "commit": "9d24c455453b965511472a8251d68e2ae02c96e0",
+      "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431"
+    },
+    "table": {
+      "branch": "main",
+      "commit": "d08af367e11c539bb7e18c2472aa761149ef6db6",
+      "knowledgeId": "08e0b828-ac04-4dce-8e73-eb2ceb151072"
+    }
+  },
+  "repoVersionsNote": "branch and commit reflect the on-disk checkout at authoring time (verified via git). NOTE: react has moved since v3 (was 172742b, now f598ec1); all react paths in this file were re-verified at the new commit. [2026-08-02] Six repos re-pinned to the indexing layer's commits (react 3a717e42, redux-toolkit b1c51301, query 9d24c455, react-redux ad5d1e08, reselect 8d87c27b, redux 3aa561f9); all 14 cases' expected paths, key import couplings, and the query line-number citations (:132, :305) re-verified unchanged at the new commits.",
+  "grepResistanceNote": "Unlike v2/v3, the questions deliberately avoid the identifiers that appear in the target files (no 'useSyncExternalStore', 'Dispatch', 'Middleware', 'createContext', '__REDUX_DEVTOOLS_EXTENSION__', 'weakMapMemoize', 'thenable' in the question text). Grepping the question's own nouns ('observe a data source', 'interception pipeline', 'time-travel debugging', 'state-transition event') returns zero relevant hits, or — for generic words like 'snapshot'/'subscribe'/'listener' — thousands of hits spread across ~10 repos with no ranking. Retrieval therefore has to be structural or semantic, not lexical: (1) resolve each repo's public surface from package.json exports -> entry index files; (2) walk the cross-repo import graph for edges that import the coupled package ('zustand/traditional' inside xyflow, 'redux-thunk' inside redux-toolkit, 'use-sync-external-store/shim' inside zustand/react-redux); (3) map the question's behavioral vocabulary onto API concepts (a knowledge-graph / embedding index does this in one hop; an agent without one must read entry points and follow re-export chains).",
+  "benchmarkNote": "Cost/time model for a grep-free agentic retrieval, ASSUMING NO PROMPT CACHING (no cache read or write): every API request re-bills the FULL accumulated context (system prompt + tool schemas ~12,000 tok + question ~400 tok + all tool results so far) at the normal input rate. contentTokens = measured on-disk bytes/4 of everything the agent must pull in (per-repo directory listing + package.json + entry/index hop + the full expected files). turns = agent tool-call turns modeled as repos+3 (list folder; batch-read package.jsons+entries; follow import edges; read targets; final answer). billedInputTokens = turns*(system+question) + contentTokens*turns/2 (content accumulates linearly across turns and is re-sent every subsequent request). outputTokens = ~100/intermediate turn (tool calls) + ~300 final answer. costUsd = billedInput/1e6*5.00 + output/1e6*25.00 (Opus 4.8: $5 in / $25 out per Mtok). retrievalTimeSeconds = MEASURED wall-clock of the local file reads only; estimatedAgentSeconds = turns*3.5s (API round-trip + generation) + 2s, the realistic end-to-end latency. Caveats: hidden reasoning tokens are not billed here, and an agent that wanders into wrong candidate files before the right ones can easily 2-3x contentTokens — treat these as the FLOOR for grep-free retrieval. Costs are reported for BOTH claude-opus-4-8 ($5/$25 per Mtok) and claude-fable-5 ($10/$50 per Mtok — note: there is no 'Opus 5'; Fable 5 is the Claude 5 family flagship). Totals live in the `totals` block.",
+  "cases": [
+    {
+      "id": "xrepo-v5-1-external-container-bridge-contract",
+      "question": "React tightens the rules for how a component may observe a data source that lives outside the renderer: the value read during render must now be referentially stable between render and commit, and the cleanup timing of the observation changes under concurrent re-renders. Every library in this folder that bridges its own state container into React components has such a bridge layer. Which files in which repositories implement that bridge and must change?",
+      "why_cross_repo": "The contract lives in react (`packages/react/src/ReactHooks.js` for the built-in hook, `packages/use-sync-external-store/src/useSyncExternalStoreWithSelector.js` for the shim two libraries consume). zustand's React binding (`src/react.ts`) calls `React.useSyncExternalStore` directly; react-redux's `useSelector` goes through the shim via its typing file (`src/hooks/useSelector.ts`, `src/utils/useSyncExternalStore.ts`); TanStack DB's `useLiveQuery` (`packages/react-db/src/useLiveQuery.ts`) builds a subscribe/getSnapshot pair from a collection. One react contract change hits three independent bridge layers that never import each other. v5 additions: zustand's second bridge useStoreWithEqualityFn (src/traditional.ts:36), react-redux's connect HOC (src/components/connect.tsx:742 calls useSyncExternalStore), and TanStack Query's five uSES bridges (react-query useBaseQuery.ts:107, useQueries.ts:269, useMutation.ts:42, useIsFetching.ts:15, useMutationState.ts:57). table does NOT qualify (useReactTable binds via plain useState); jotai uses useReducer; preact-query targets Preact, not React. [v5 revision: re-verified against current disk with query/table repos present; expected set updated accordingly.]",
+      "grep_resistance": "The question never says 'useSyncExternalStore', 'getSnapshot' or 'subscribe'. Grepping 'observe'/'data source'/'bridge' finds nothing relevant; grepping 'snapshot' returns hundreds of unranked hits across react, db, and zustand. The reliable route is the import graph: find who imports 'use-sync-external-store/shim' or calls the React 18 store hook.",
+      "min_repos": 5,
+      "min_files": 13,
+      "expected": [
+        {
+          "repo": "react",
+          "knowledgeId": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9",
+          "files": [
+            "packages/react/src/ReactHooks.js",
+            "packages/use-sync-external-store/src/useSyncExternalStoreWithSelector.js"
+          ]
+        },
+        {
+          "repo": "zustand",
+          "knowledgeId": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99",
+          "files": [
+            "src/react.ts",
+            "src/traditional.ts"
+          ]
+        },
+        {
+          "repo": "react-redux",
+          "knowledgeId": "874bb764335b006f6e1f2df028475246",
+          "files": [
+            "src/hooks/useSelector.ts",
+            "src/utils/useSyncExternalStore.ts",
+            "src/components/connect.tsx"
+          ]
+        },
+        {
+          "repo": "db",
+          "knowledgeId": "659659a1-0515-4ae1-92a9-1961c8c10abe",
+          "files": [
+            "packages/react-db/src/useLiveQuery.ts"
+          ]
+        },
+        {
+          "repo": "query",
+          "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431",
+          "files": [
+            "packages/react-query/src/useBaseQuery.ts",
+            "packages/react-query/src/useQueries.ts",
+            "packages/react-query/src/useMutation.ts",
+            "packages/react-query/src/useIsFetching.ts",
+            "packages/react-query/src/useMutationState.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 8,
+        "tokens": {
+          "contentTokens": 33688,
+          "billedInput": 233952,
+          "output": 1000
+        },
+        "costUsd": 1.1948,
+        "costUsdFable5": 2.3895,
+        "retrievalTimeSeconds": 0.0155,
+        "estimatedAgentSeconds": 30.0
+      },
+      "measuredBenchmark": {
+        "model": "claude-fable-5",
+        "measured": true,
+        "promptCaching": "disabled (DISABLE_PROMPT_CACHING=1; cacheRead=cacheCreation=0 verified)",
+        "harness": "claude -p headless, read-only tools (Grep/Glob/Read), fresh session, OTel -> local OTLP receiver",
+        "sessionId": "6be5078d-3d2a-4828-b1b3-1d78ed5e1bf9",
+        "wallSeconds": 213.9,
+        "apiSeconds": 209.7,
+        "turns": 25,
+        "tokens": {
+          "input": 222094,
+          "output": 16300,
+          "cacheRead": 0,
+          "cacheCreation": 0
+        },
+        "otelTokens": null,
+        "costUsd": 3.036846,
+        "otelCostUsd": null,
+        "retrievalScore": "13/13"
+      }
+    },
+    {
+      "id": "xrepo-v5-2-custom-comparison-rerender-gate",
+      "question": "The optional 'is it still the same?' slot — the parameter that lets an application pass its own comparison function so a component skips re-rendering when the slice it derives from a store is equivalent but not identical — gets a new contract (the comparator must now also receive the previous selection as context). Which libraries in the folder expose or forward that slot to applications, and which files must change?",
+      "why_cross_repo": "The comparator slot is implemented in react's shim (`packages/use-sync-external-store/src/useSyncExternalStoreWithSelector.js`, the `isEqual` parameter). zustand forwards it via `useStoreWithEqualityFn` (`src/traditional.ts`); xyflow's `useStore` hook re-exposes zustand's slot to React Flow users (`packages/react/src/hooks/useStore.ts` imports `useStoreWithEqualityFn` from 'zustand/traditional'); react-redux forwards user equality functions from `useSelector` (`src/hooks/useSelector.ts`) into the same shim slot. One contract change flows react -> zustand -> xyflow and react -> react-redux simultaneously. v5 additions: react-redux's connect() comparator family (areStatesEqual/areStatePropsEqual/areOwnPropsEqual in src/components/connect.tsx:237-256, consumed in src/connect/selectorFactory.ts:124-135, plus areMergedPropsEqual in src/connect/mergeProps.ts:32-50) and jotai's selectAtom equalityFn (src/vanilla/utils/selectAtom.ts:18-40 — its comparator already receives the previous slice). zustand's subscribeWithSelector equalityFn gates subscription callbacks, not renders (noted, excluded). query/table/db expose no user-supplied re-render comparator (verified). [v5 revision: re-verified against current disk with query/table repos present; expected set updated accordingly.]",
+      "grep_resistance": "The question avoids 'equalityFn', 'isEqual', and 'useStoreWithEqualityFn'. Grepping 'comparison'/'equivalent'/'skips re-rendering' hits docs and comments at best. The productive route is following the re-export chain: xyflow's hook is only findable by seeing that its useStore imports from 'zustand/traditional', which in turn imports the with-selector shim from react.",
+      "min_repos": 5,
+      "min_files": 8,
+      "expected": [
+        {
+          "repo": "react",
+          "knowledgeId": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9",
+          "files": [
+            "packages/use-sync-external-store/src/useSyncExternalStoreWithSelector.js"
+          ]
+        },
+        {
+          "repo": "zustand",
+          "knowledgeId": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99",
+          "files": [
+            "src/traditional.ts"
+          ]
+        },
+        {
+          "repo": "xyflow",
+          "knowledgeId": "6f1f2a40-aa51-4fe1-b9d2-d33ee4571368",
+          "files": [
+            "packages/react/src/hooks/useStore.ts"
+          ]
+        },
+        {
+          "repo": "react-redux",
+          "knowledgeId": "874bb764335b006f6e1f2df028475246",
+          "files": [
+            "src/hooks/useSelector.ts",
+            "src/components/connect.tsx",
+            "src/connect/selectorFactory.ts",
+            "src/connect/mergeProps.ts"
+          ]
+        },
+        {
+          "repo": "jotai",
+          "knowledgeId": "581a242e-3f4c-45db-8e84-c69cf159ac44",
+          "files": [
+            "src/vanilla/utils/selectAtom.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 8,
+        "tokens": {
+          "contentTokens": 24105,
+          "billedInput": 195620,
+          "output": 1000
+        },
+        "costUsd": 1.0031,
+        "costUsdFable5": 2.0062,
+        "retrievalTimeSeconds": 0.0028,
+        "estimatedAgentSeconds": 30.0
+      },
+      "measuredBenchmark": {
+        "model": "claude-fable-5",
+        "measured": true,
+        "promptCaching": "disabled (DISABLE_PROMPT_CACHING=1; cacheRead=cacheCreation=0 verified)",
+        "harness": "claude -p headless, read-only tools (Grep/Glob/Read), fresh session, OTel -> local OTLP receiver",
+        "sessionId": "045df962-a509-4e96-8549-06afca7b1067",
+        "wallSeconds": 314.6,
+        "apiSeconds": 314.4,
+        "turns": 27,
+        "tokens": {
+          "input": 532359,
+          "output": 23259,
+          "cacheRead": 0,
+          "cacheCreation": 0
+        },
+        "otelTokens": null,
+        "costUsd": 6.48746,
+        "otelCostUsd": null,
+        "retrievalScore": "5/8"
+      }
+    },
+    {
+      "id": "xrepo-v5-3-nearest-container-injection",
+      "question": "The dependency-injection mechanism by which a component locates the nearest state container placed above it in the component tree (instead of falling back to a module-level singleton) changes its propagation and default-value semantics under concurrent rendering. Which wrapper components and injection points across the folder are built on this mechanism and must be revisited?",
+      "why_cross_repo": "The mechanism is react's context (`packages/react/src/ReactContext.js`). Three libraries independently build store-injection wrappers on it: react-redux (`src/components/Context.ts` + `src/components/Provider.tsx`), jotai (`src/react/Provider.ts`), and xyflow, whose `ReactFlowProvider` creates a zustand store and injects it via a React context (`packages/react/src/contexts/StoreContext.ts`, `packages/react/src/components/ReactFlowProvider/index.tsx`). None of the three import each other; only the react contract couples them. v5 addition: TanStack Query's QueryClientProvider (packages/react-query/src/QueryClientProvider.tsx:6-41 — createContext<QueryClient>, useQueryClient nearest-ancestor lookup, Provider component consumed by every hook). zustand has no built-in context; table is headless (no createContext); db's react package exposes no store-injection context (verified). [v5 revision: re-verified against current disk with query/table repos present; expected set updated accordingly.]",
+      "grep_resistance": "'dependency injection', 'nearest container', and 'wrapper component' appear nowhere in the code. Grepping 'Provider' drowns in thousands of hits (react fixtures, docs, tests across 10 repos). The discriminating signal is structural: which files call the context-creation API with a store type argument — an import-graph/semantic query, not a keyword.",
+      "min_repos": 5,
+      "min_files": 7,
+      "expected": [
+        {
+          "repo": "react",
+          "knowledgeId": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9",
+          "files": [
+            "packages/react/src/ReactContext.js"
+          ]
+        },
+        {
+          "repo": "react-redux",
+          "knowledgeId": "874bb764335b006f6e1f2df028475246",
+          "files": [
+            "src/components/Context.ts",
+            "src/components/Provider.tsx"
+          ]
+        },
+        {
+          "repo": "jotai",
+          "knowledgeId": "581a242e-3f4c-45db-8e84-c69cf159ac44",
+          "files": [
+            "src/react/Provider.ts"
+          ]
+        },
+        {
+          "repo": "xyflow",
+          "knowledgeId": "6f1f2a40-aa51-4fe1-b9d2-d33ee4571368",
+          "files": [
+            "packages/react/src/contexts/StoreContext.ts",
+            "packages/react/src/components/ReactFlowProvider/index.tsx"
+          ]
+        },
+        {
+          "repo": "query",
+          "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431",
+          "files": [
+            "packages/react-query/src/QueryClientProvider.tsx"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 8,
+        "tokens": {
+          "contentTokens": 12985,
+          "billedInput": 151140,
+          "output": 1000
+        },
+        "costUsd": 0.7807,
+        "costUsdFable5": 1.5614,
+        "retrievalTimeSeconds": 0.0026,
+        "estimatedAgentSeconds": 30.0
+      },
+      "measuredBenchmark": {
+        "model": "claude-fable-5",
+        "measured": true,
+        "promptCaching": "disabled (DISABLE_PROMPT_CACHING=1; cacheRead=cacheCreation=0 verified)",
+        "harness": "claude -p headless, read-only tools (Grep/Glob/Read), fresh session, OTel -> local OTLP receiver",
+        "sessionId": "322cc9f8-10ad-4685-9410-075c93f4f9c7",
+        "wallSeconds": 244.2,
+        "apiSeconds": 242.9,
+        "turns": 22,
+        "tokens": {
+          "input": 289109,
+          "output": 18682,
+          "cacheRead": 0,
+          "cacheCreation": 0
+        },
+        "otelTokens": null,
+        "costUsd": 3.826086,
+        "otelCostUsd": null,
+        "retrievalScore": "7/7"
+      }
+    },
+    {
+      "id": "xrepo-v5-4-event-submission-typing",
+      "question": "The typed contract of the function an application calls to submit a state-transition event to the store — what shapes it accepts and what it hands back, including the extension that lets you submit a function (which receives the submitter and a state reader) instead of a plain event — is re-parameterized. Trace the full typing blast radius across the folder: the hook applications use to obtain the submitter, the async-task creator built on the extension, and the background-listener layer.",
+      "why_cross_repo": "The base contract is redux's `Dispatch` (`src/types/store.ts`); the function-submission extension is redux-thunk's `ThunkDispatch` (`src/types.ts`). react-redux surfaces the submitter to applications via `useDispatch` (`src/hooks/useDispatch.ts`); redux-toolkit builds `createAsyncThunk` (`src/createAsyncThunk.ts`) and the listener middleware (`src/listenerMiddleware/index.ts`) on both. Re-parameterizing the base type in redux alone leaves three downstream typings broken. v5 addition: the listener layer's ThunkDispatch typing surface actually spans listenerMiddleware/types.ts (ListenerEffectAPI, DispatchType defaults at :142/:310/:327) as well as index.ts. query/table carry zero references to redux Dispatch/ThunkDispatch (verified absent); zustand's redux middleware self-types its own Action and is not on this contract. RTK paths corrected to packages/toolkit/src/. [v5 revision: re-verified against current disk with query/table repos present; expected set updated accordingly.]",
+      "grep_resistance": "The question never says 'dispatch', 'Dispatch', 'thunk', or 'action'. Grepping 'submit'/'state-transition event'/'submitter' finds nothing. The mapping from 'function you call to submit an event' to the dispatch type is a concept-to-symbol translation only an index with semantic understanding (or an agent reading redux's exported types first) can make.",
+      "min_repos": 3,
+      "min_files": 5,
+      "expected": [
+        {
+          "repo": "redux",
+          "knowledgeId": "c0c638c58b7d1844702ea4c7f14c62db",
+          "files": [
+            "src/types/store.ts"
+          ]
+        },
+        {
+          "repo": "react-redux",
+          "knowledgeId": "874bb764335b006f6e1f2df028475246",
+          "files": [
+            "src/hooks/useDispatch.ts"
+          ]
+        },
+        {
+          "repo": "redux-toolkit",
+          "knowledgeId": "5129210f7edc89d624231a57a3b76770",
+          "files": [
+            "packages/toolkit/src/createAsyncThunk.ts",
+            "packages/toolkit/src/listenerMiddleware/index.ts",
+            "packages/toolkit/src/listenerMiddleware/types.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 7,
+        "tokens": {
+          "contentTokens": 25745,
+          "billedInput": 176907,
+          "output": 900
+        },
+        "costUsd": 0.907,
+        "costUsdFable5": 1.8141,
+        "retrievalTimeSeconds": 0.0026,
+        "estimatedAgentSeconds": 26.5
+      },
+      "measuredBenchmark": {
+        "model": "claude-fable-5",
+        "measured": true,
+        "promptCaching": "disabled (DISABLE_PROMPT_CACHING=1; cacheRead=cacheCreation=0 verified)",
+        "harness": "claude -p headless, read-only tools (Grep/Glob/Read), fresh session, OTel -> local OTLP receiver",
+        "sessionId": "0f6ad2f9-8abb-4a89-8875-6ba69edd5b5a",
+        "wallSeconds": 84.4,
+        "apiSeconds": 82.6,
+        "turns": 13,
+        "tokens": {
+          "input": 147042,
+          "output": 6413,
+          "cacheRead": 0,
+          "cacheCreation": 0
+        },
+        "otelTokens": {
+          "input": 147881.0,
+          "output": 6428.0,
+          "cacheRead": 0.0,
+          "cacheCreation": 0.0
+        },
+        "costUsd": 1.791984,
+        "otelCostUsd": 1.792,
+        "retrievalScore": "6/6"
+      }
+    },
+    {
+      "id": "xrepo-v5-5-interception-pipeline-signature",
+      "question": "The store's interception pipeline — the triple-curried layer that wraps event submission so cross-cutting concerns (async work, logging, invariant checks) can run before and after each state transition — changes its curried signature and the capability object handed to each interceptor. Which repos in the folder define, implement, or assemble interceptors on this contract, and which files must change?",
+      "why_cross_repo": "The contract is redux's `Middleware`/`MiddlewareAPI` (`src/types/middleware.ts`) applied by `applyMiddleware` (`src/applyMiddleware.ts`). redux-thunk implements an interceptor on it (`src/types.ts`, `src/index.ts`); redux-toolkit assembles the default pipeline (`src/getDefaultMiddleware.ts`) and ships its own invariant interceptor (`src/serializableStateInvariantMiddleware.ts`). A curried-signature change in redux breaks both downstream repos independently. v5 additions (all implement the api => next => action curried contract): immutableStateInvariantMiddleware.ts:175-221, actionCreatorInvariantMiddleware.ts:25-28, listenerMiddleware/index.ts:484 (api.getState before/after next), dynamicMiddleware/index.ts:78-84 (re-composes registered middleware as mw(api)(next)(action)), and RTK Query's core middleware query/core/buildMiddleware/index.ts:73-95. zustand src/middleware/redux.ts is NOT on this contract (StateCreator wrapper, no next/MiddlewareAPI) and remains excluded; query/table verified absent. RTK paths corrected to packages/toolkit/src/. [v5 revision: re-verified against current disk with query/table repos present; expected set updated accordingly.]",
+      "grep_resistance": "'interception pipeline', 'cross-cutting', and 'triple-curried' appear nowhere in the sources. Grepping 'middleware' returns 1000+ hits across five repos (docs, tests, RTK Query internals) with no ranking of which files DEFINE vs merely mention the contract. The definition/consumer split requires reading redux's type surface, then following who imports 'redux' with those type names.",
+      "min_repos": 2,
+      "min_files": 9,
+      "expected": [
+        {
+          "repo": "redux",
+          "knowledgeId": "c0c638c58b7d1844702ea4c7f14c62db",
+          "files": [
+            "src/types/middleware.ts",
+            "src/applyMiddleware.ts"
+          ]
+        },
+        {
+          "repo": "redux-toolkit",
+          "knowledgeId": "5129210f7edc89d624231a57a3b76770",
+          "files": [
+            "packages/toolkit/src/getDefaultMiddleware.ts",
+            "packages/toolkit/src/serializableStateInvariantMiddleware.ts",
+            "packages/toolkit/src/immutableStateInvariantMiddleware.ts",
+            "packages/toolkit/src/actionCreatorInvariantMiddleware.ts",
+            "packages/toolkit/src/listenerMiddleware/index.ts",
+            "packages/toolkit/src/dynamicMiddleware/index.ts",
+            "packages/toolkit/src/query/core/buildMiddleware/index.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 6,
+        "tokens": {
+          "contentTokens": 18617,
+          "billedInput": 130251,
+          "output": 800
+        },
+        "costUsd": 0.6713,
+        "costUsdFable5": 1.3425,
+        "retrievalTimeSeconds": 0.0018,
+        "estimatedAgentSeconds": 23.0
+      },
+      "measuredBenchmark": {
+        "model": "claude-fable-5",
+        "measured": true,
+        "promptCaching": "disabled (DISABLE_PROMPT_CACHING=1; cacheRead=cacheCreation=0 verified)",
+        "harness": "claude -p headless, read-only tools (Grep/Glob/Read), fresh session, OTel -> local OTLP receiver",
+        "sessionId": "03911e1c-1787-49ac-9606-768fe1a79fa1",
+        "wallSeconds": 286.0,
+        "apiSeconds": 282.9,
+        "turns": 27,
+        "tokens": {
+          "input": 453294,
+          "output": 20634,
+          "cacheRead": 0,
+          "cacheCreation": 0
+        },
+        "otelTokens": {
+          "input": 454113.0,
+          "output": 20650.0,
+          "cacheRead": 0.0,
+          "cacheCreation": 0.0
+        },
+        "costUsd": 5.565538999999999,
+        "otelCostUsd": 5.5655,
+        "retrievalScore": "11/11"
+      }
+    },
+    {
+      "id": "xrepo-v5-6-legitimate-event-shape-guards",
+      "question": "The definition of what counts as a legitimate state-transition event — a tagged plain object, plus the runtime guards that decide 'is this a plain object?' and 'is this a valid event?' — becomes stricter (e.g. prototype-chain rules change). Which repos re-export those guards, depend on them for invariant checking, or hand-roll a parallel implementation of the same event model that must stay consistent?",
+      "why_cross_repo": "The event model and guards live in redux (`src/types/actions.ts`, `src/utils/isAction.ts`, `src/utils/isPlainObject.ts`). redux-toolkit re-exports the guards through its import boundary (`src/reduxImports.ts`) and leans on plain-object detection in `src/serializableStateInvariantMiddleware.ts`. zustand's redux middleware (`src/middleware/redux.ts`) hand-implements the same tagged-object event model without importing redux, so a stricter contract must be mirrored there to keep the two reducer models consistent — three repos, one semantic contract. v5 addition: react-redux hand-rolls the identical prototype-chain plain-object guard (src/utils/isPlainObject.ts, consumed by verifyPlainObject.ts) — a fork that must stay consistent when the prototype rules tighten. TanStack Query's isPlainObject (query-core utils) uses a different algorithm for cache-data structural sharing, not the event model — excluded; table has no such guard. RTK paths corrected to packages/toolkit/src/. [v5 revision: re-verified against current disk with query/table repos present; expected set updated accordingly.]",
+      "grep_resistance": "'legitimate event', 'tagged plain object', and 'prototype-chain rules' match nothing. Grepping 'isPlainObject' would find redux and RTK but never zustand's middleware, which shares zero identifiers with redux — the coupling is purely semantic (same { type } shape, independently declared). Only concept-level retrieval (or prior knowledge that zustand ships a redux-style middleware) surfaces the third repo.",
+      "min_repos": 4,
+      "min_files": 7,
+      "expected": [
+        {
+          "repo": "redux",
+          "knowledgeId": "c0c638c58b7d1844702ea4c7f14c62db",
+          "files": [
+            "src/types/actions.ts",
+            "src/utils/isAction.ts",
+            "src/utils/isPlainObject.ts"
+          ]
+        },
+        {
+          "repo": "redux-toolkit",
+          "knowledgeId": "5129210f7edc89d624231a57a3b76770",
+          "files": [
+            "packages/toolkit/src/reduxImports.ts",
+            "packages/toolkit/src/serializableStateInvariantMiddleware.ts"
+          ]
+        },
+        {
+          "repo": "zustand",
+          "knowledgeId": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99",
+          "files": [
+            "src/middleware/redux.ts"
+          ]
+        },
+        {
+          "repo": "react-redux",
+          "knowledgeId": "874bb764335b006f6e1f2df028475246",
+          "files": [
+            "src/utils/isPlainObject.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 7,
+        "tokens": {
+          "contentTokens": 10417,
+          "billedInput": 123259,
+          "output": 900
+        },
+        "costUsd": 0.6388,
+        "costUsdFable5": 1.2776,
+        "retrievalTimeSeconds": 0.0011,
+        "estimatedAgentSeconds": 26.5
+      }
+    },
+    {
+      "id": "xrepo-v5-7-pending-value-protocol",
+      "question": "React tightens what a pending value that suspends rendering must look like: any awaitable consumed during render must carry a resolved status/value/reason protocol stamped on the object itself. Which async feeders across the folder produce, shim, or throw such pending values into the renderer, and which files must be updated?",
+      "why_cross_repo": "The protocol lives in react (`packages/react/src/ReactHooks.js` for `use`, `packages/react-reconciler/src/ReactFiberThenable.js` for the status tracking). jotai both consumes and shims it — `src/react/useAtomValue.ts` prefers `React.use` and stamps promises via its status-attachment helper, fed by async promises built in `src/vanilla/utils/atomWithObservable.ts`. TanStack DB throws a loading promise from its Suspense hook (`packages/react-db/src/useLiveSuspenseQuery.ts`). One react protocol change hits two async feeders that share no code. v5 additions (query repo, cloned after v4 authoring): TanStack Query is the most explicit React-thenable shim in the folder — packages/query-core/src/thenable.ts authors Thenable types 'matching React's promise shape' and pendingThenable()/tryResolveSync() fabricate stamped pending values; queryObserver.ts maintains #currentThenable and exposes it as result.promise (:591); react-query useBaseQuery.ts throws fetchOptimistic() into render (:132); useQueries.ts throws a raw unstamped Promise.all(suspensePromises) (:305). Second-order sites (retryer.ts pendingThenable producer :83, suspense.ts fetchOptimistic definition, hydration.ts tryResolveSync consumer) and the preact-query mirrors (Preact's renderer, not React's) are noted but outside the minimum set. [v5 revision: re-verified against current disk with query/table repos present; expected set updated accordingly.]",
+      "grep_resistance": "The question avoids 'thenable', 'use()', 'Suspense', and 'promise'. 'Pending value', 'awaitable', and 'stamped protocol' match nothing literally; grepping 'status' is hopeless across 10 repos. Finding the jotai shim requires reading its React entry hook; finding the db hook requires knowing its react-db package throws promises — both are structural walks from package entry points.",
+      "min_repos": 4,
+      "min_files": 9,
+      "expected": [
+        {
+          "repo": "react",
+          "knowledgeId": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9",
+          "files": [
+            "packages/react/src/ReactHooks.js",
+            "packages/react-reconciler/src/ReactFiberThenable.js"
+          ]
+        },
+        {
+          "repo": "jotai",
+          "knowledgeId": "581a242e-3f4c-45db-8e84-c69cf159ac44",
+          "files": [
+            "src/react/useAtomValue.ts",
+            "src/vanilla/utils/atomWithObservable.ts"
+          ]
+        },
+        {
+          "repo": "db",
+          "knowledgeId": "659659a1-0515-4ae1-92a9-1961c8c10abe",
+          "files": [
+            "packages/react-db/src/useLiveSuspenseQuery.ts"
+          ]
+        },
+        {
+          "repo": "query",
+          "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431",
+          "files": [
+            "packages/query-core/src/thenable.ts",
+            "packages/query-core/src/queryObserver.ts",
+            "packages/react-query/src/useBaseQuery.ts",
+            "packages/react-query/src/useQueries.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 7,
+        "tokens": {
+          "contentTokens": 30739,
+          "billedInput": 194386,
+          "output": 900
+        },
+        "costUsd": 0.9944,
+        "costUsdFable5": 1.9889,
+        "retrievalTimeSeconds": 0.0025,
+        "estimatedAgentSeconds": 26.5
+      }
+    },
+    {
+      "id": "xrepo-v5-8-time-travel-debugger-wire-protocol",
+      "question": "The wire protocol for talking to the browser's time-travel debugging extension — the global the extension injects into the page, its connect/send handshake, and the store-enhancer type a connection must satisfy — changes. Which repos in the folder speak this protocol directly, and which files carry the protocol typing and the connection logic?",
+      "why_cross_repo": "Two repos speak the protocol independently: zustand's devtools middleware (`src/middleware/devtools.ts`, typed against the injected extension global) and redux-toolkit's devtools integration (`src/devtoolsExtension.ts`, wired into `src/configureStore.ts`). Both type their integration on redux's contracts — RTK's devtools file imports `Action`/`StoreEnhancer` from redux (`src/types/actions.ts`, `src/types/store.ts`). A protocol/enhancer-shape change therefore spans redux + redux-toolkit + zustand, and zustand's connection cannot be found from redux's reverse-dependency graph since it types the global structurally. v5 re-verification: unchanged — TanStack query/table devtools speak their own protocol (no __REDUX_DEVTOOLS_EXTENSION__ anywhere in query/table/jotai/db/xyflow src). RTK paths corrected to packages/toolkit/src/. [v5 revision: re-verified against current disk with query/table repos present; expected set updated accordingly.]",
+      "grep_resistance": "'time-travel debugging' appears in zero source files — the code says `__REDUX_DEVTOOLS_EXTENSION__`, an identifier the question deliberately withholds. An agent must translate the described capability into the extension global's name (world knowledge) or scan middleware directories of every state library for window-global access — a semantic or structural hop either way.",
+      "min_repos": 3,
+      "min_files": 5,
+      "expected": [
+        {
+          "repo": "redux",
+          "knowledgeId": "c0c638c58b7d1844702ea4c7f14c62db",
+          "files": [
+            "src/types/actions.ts",
+            "src/types/store.ts"
+          ]
+        },
+        {
+          "repo": "redux-toolkit",
+          "knowledgeId": "5129210f7edc89d624231a57a3b76770",
+          "files": [
+            "packages/toolkit/src/devtoolsExtension.ts",
+            "packages/toolkit/src/configureStore.ts"
+          ]
+        },
+        {
+          "repo": "zustand",
+          "knowledgeId": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99",
+          "files": [
+            "src/middleware/devtools.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 6,
+        "tokens": {
+          "contentTokens": 16919,
+          "billedInput": 125157,
+          "output": 800
+        },
+        "costUsd": 0.6458,
+        "costUsdFable5": 1.2916,
+        "retrievalTimeSeconds": 0.0007,
+        "estimatedAgentSeconds": 23.0
+      }
+    },
+    {
+      "id": "xrepo-v5-9-notification-sweep-reentrancy",
+      "question": "The re-entrancy contract for change notification is revised: what happens when an observer detaches itself, attaches a new observer, or triggers another state update while the notification sweep is still in progress. Several repos in the folder hand-roll their own notification loop with snapshot-the-observer-list semantics rather than sharing one implementation. Which files implement these loops and must be aligned to the new contract?",
+      "why_cross_repo": "Four independent implementations of the same contract exist: redux's `createStore` (`src/createStore.ts`, `ensureCanMutateNextListeners` snapshots the listener array), zustand's vanilla store (`src/vanilla.ts`, a `Set` iterated on `setState`), jotai's store internals (`src/vanilla/store.ts` delegating to `src/vanilla/internals.ts`, mounted-atom listener sets), and TanStack DB's collection change subscriptions (`packages/db/src/collection/index.ts`, `subscribeChanges`). They share no code; only the behavioral contract couples them, so a revision must touch all four repos. v5 revisions: db's change-subscriber loop moved to packages/db/src/collection/changes.ts (changeSubscriptions Set at :29, emitEvents sweep at :111; collection/index.ts now only delegates); jotai/src/vanilla/store.ts is a thin facade — the sweep lives entirely in internals.ts (callbacks snapshot at :530-537). Additions: TanStack Query's Subscribable base (packages/query-core/src/subscribable.ts, listeners Set iterated live by 7 subclasses) and notifyManager.ts (snapshot-and-flush queue :37-46), and react-redux's Subscription.ts (hand-rolled linked-list listener collection with nested-subscription sweep :16-77). table owns no observer loop (onStateChange is a user callback) — excluded. [v5 revision: re-verified against current disk with query/table repos present; expected set updated accordingly.]",
+      "grep_resistance": "'re-entrancy', 'notification sweep', and 'observer' are absent from the sources — each repo uses different vocabulary ('listeners', 'subscribers', 'mounted', 'changes'). Grepping 'listener' returns thousands of hits across react's event system alone. Identifying the four store-notification loops (and excluding react's DOM event listeners) requires understanding each repo's store architecture, not keywords.",
+      "min_repos": 6,
+      "min_files": 7,
+      "expected": [
+        {
+          "repo": "redux",
+          "knowledgeId": "c0c638c58b7d1844702ea4c7f14c62db",
+          "files": [
+            "src/createStore.ts"
+          ]
+        },
+        {
+          "repo": "zustand",
+          "knowledgeId": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99",
+          "files": [
+            "src/vanilla.ts"
+          ]
+        },
+        {
+          "repo": "jotai",
+          "knowledgeId": "581a242e-3f4c-45db-8e84-c69cf159ac44",
+          "files": [
+            "src/vanilla/internals.ts"
+          ]
+        },
+        {
+          "repo": "db",
+          "knowledgeId": "659659a1-0515-4ae1-92a9-1961c8c10abe",
+          "files": [
+            "packages/db/src/collection/changes.ts"
+          ]
+        },
+        {
+          "repo": "query",
+          "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431",
+          "files": [
+            "packages/query-core/src/subscribable.ts",
+            "packages/query-core/src/notifyManager.ts"
+          ]
+        },
+        {
+          "repo": "react-redux",
+          "knowledgeId": "874bb764335b006f6e1f2df028475246",
+          "files": [
+            "src/utils/Subscription.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 9,
+        "tokens": {
+          "contentTokens": 28266,
+          "billedInput": 238797,
+          "output": 1100
+        },
+        "costUsd": 1.2215,
+        "costUsdFable5": 2.443,
+        "retrievalTimeSeconds": 0.0018,
+        "estimatedAgentSeconds": 33.5
+      }
+    },
+    {
+      "id": "xrepo-v5-10-derived-view-caching-contract",
+      "question": "The caching contract for derived views changes: repeated reads with unchanged inputs must return the identical object reference so downstream consumers can bail out, and the cache-key strategy of the weak-reference-based cache is revised. Which repos implement or re-export this caching layer, which internal consumers sit on it, and which repo hand-rolls an equivalent cache for its derived-slice utility that must stay behaviorally consistent?",
+      "why_cross_repo": "The caching layer is reselect (`src/weakMapMemoize.ts` — the WeakRef-based default — and `src/createSelectorCreator.ts`). redux-toolkit re-exports it through `src/reselectImports.ts`, builds its draft-safe creator on it (`src/createDraftSafeSelector.ts`), and RTK Query's selector layer consumes it (`src/query/core/buildSelectors.ts`). jotai's `selectAtom` (`src/vanilla/utils/selectAtom.ts`) hand-rolls a WeakMap-based memo (`memo3`) implementing the same identical-reference contract without importing reselect. Three repos, one caching semantics. v5 addition: TanStack Table's memo()/getMemoOptions (packages/table-core/src/utils.ts :136-219) — a hand-rolled same-inputs-same-reference dependency cache powering every derived row model (~21 consumer files). query's replaceEqualDeep preserves references via structural sharing but holds no keyed cache, so it is noted-not-required. RTK paths corrected to packages/toolkit/src/. [v5 revision: re-verified against current disk with query/table repos present; expected set updated accordingly.]",
+      "grep_resistance": "'derived views', 'identical object reference', and 'cache-key strategy' match nothing. Grepping 'memoize' finds reselect and RTK but never jotai's `memo3`, which shares no identifier with reselect — the third repo is reachable only by concept ('derived slice utility with caching') or by reading jotai's utils entry. This mirrors the payment-gateway problem: the behavior is described, the code never names it.",
+      "min_repos": 4,
+      "min_files": 7,
+      "expected": [
+        {
+          "repo": "reselect",
+          "knowledgeId": "2d8056b4-75b0-5442-b99d-b9762703683b",
+          "files": [
+            "src/weakMapMemoize.ts",
+            "src/createSelectorCreator.ts"
+          ]
+        },
+        {
+          "repo": "redux-toolkit",
+          "knowledgeId": "5129210f7edc89d624231a57a3b76770",
+          "files": [
+            "packages/toolkit/src/reselectImports.ts",
+            "packages/toolkit/src/createDraftSafeSelector.ts",
+            "packages/toolkit/src/query/core/buildSelectors.ts"
+          ]
+        },
+        {
+          "repo": "jotai",
+          "knowledgeId": "581a242e-3f4c-45db-8e84-c69cf159ac44",
+          "files": [
+            "src/vanilla/utils/selectAtom.ts"
+          ]
+        },
+        {
+          "repo": "table",
+          "knowledgeId": "08e0b828-ac04-4dce-8e73-eb2ceb151072",
+          "files": [
+            "packages/table-core/src/utils.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 7,
+        "tokens": {
+          "contentTokens": 19637,
+          "billedInput": 155529,
+          "output": 900
+        },
+        "costUsd": 0.8001,
+        "costUsdFable5": 1.6003,
+        "retrievalTimeSeconds": 0.0015,
+        "estimatedAgentSeconds": 26.5
+      }
+    },
+    {
+      "id": "xrepo-v5-11-regain-attention-revalidate",
+      "question": "Across these libraries there's a recurring pattern: when the user's browser tab comes back to the foreground after being hidden, or when the device's network link is restored after dropping, any work that was deferred, paused, or has gone stale is automatically re-attempted or re-validated. Each library hand-wires the raw browser signals — the page-became-visible-again notification and the connectivity-came-back notification — into its own 'now is a good time to re-run' trigger, and each also decides whether an in-flight or held operation may resume based on whether the page is currently attended-to and the machine is currently reachable. Suppose we change that contract so a resume/revalidate trigger must carry a reason token describing which of the two conditions fired (regained attention vs. regained connectivity), and so that being in the foreground no longer gates resumption on its own. Find every file that subscribes to those browser conditions or gates resumption on them and would have to change.",
+      "why_cross_repo": "TanStack Query wires 'page visible again' in packages/query-core/src/focusManager.ts (visibilitychange listener :17-36, setEventListener/onFocus :47-67) and 'network back' in packages/query-core/src/onlineManager.ts (online/offline listeners :15-27, setEventListener/setOnline :48-60); packages/query-core/src/retryer.ts gates continuation on both (canContinue uses focusManager.isFocused() && onlineManager.isOnline() :105-106, pause/resume :125,196-224). RTK Query independently hand-wires the same two conditions in packages/toolkit/src/query/core/setupListeners.ts (visibilitychange/focus/online/offline handlers :80-116 dispatching onFocus/onOnline actions :15-33). TanStack DB's offline outbox re-implements detection in packages/offline-transactions/src/connectivity/OnlineDetector.ts (WebOnlineDetector listens to online + visibilitychange :25-26, subscribe :66) and consumes it in packages/offline-transactions/src/OfflineExecutor.ts (onlineDetector.subscribe drains the outbox :225, unsubscribe :603-605). A reason-token/gating change forces edits in all three repos' subscription and gate sites.",
+      "grep_resistance": "The question never uses focusManager, onlineManager, retryer, setupListeners, OnlineDetector, OfflineExecutor, isFocused, isOnline, refetchOnReconnect, or refetchOnWindowFocus. It is phrased behaviorally ('tab comes back to the foreground', 'network link is restored', 'now is a good time to re-run', 'gates resumption', 'reason token'), so keyword grep over the question's nouns cannot surface the coupled files.",
+      "min_repos": 3,
+      "min_files": 6,
+      "expected": [
+        {
+          "repo": "query",
+          "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431",
+          "files": [
+            "packages/query-core/src/focusManager.ts",
+            "packages/query-core/src/onlineManager.ts",
+            "packages/query-core/src/retryer.ts"
+          ]
+        },
+        {
+          "repo": "redux-toolkit",
+          "knowledgeId": "5129210f7edc89d624231a57a3b76770",
+          "files": [
+            "packages/toolkit/src/query/core/setupListeners.ts"
+          ]
+        },
+        {
+          "repo": "db",
+          "knowledgeId": "659659a1-0515-4ae1-92a9-1961c8c10abe",
+          "files": [
+            "packages/offline-transactions/src/connectivity/OnlineDetector.ts",
+            "packages/offline-transactions/src/OfflineExecutor.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 6,
+        "tokens": {
+          "contentTokens": 16118,
+          "billedInput": 122754,
+          "output": 800
+        },
+        "costUsd": 0.6338,
+        "costUsdFable5": 1.2675,
+        "retrievalTimeSeconds": 0.0016,
+        "estimatedAgentSeconds": 23.0
+      }
+    },
+    {
+      "id": "xrepo-v5-12-geometric-retry-delay-ceiling",
+      "question": "Three of these libraries each independently roll their own policy for spacing out repeated attempts at an operation that keeps failing: the pause before the next try grows geometrically with the count of consecutive failures (roughly doubling each round), is clamped to a maximum ceiling so it never runs away, and after a bounded number of attempts the operation stops retrying and surfaces the failure. Some variants also fuzz the wait with a random component to avoid synchronized retries. Suppose we change this contract so the wait must be derived from wall-clock time elapsed since the first failure rather than from the attempt count, and so the ceiling becomes mandatory rather than optional. Find every self-contained implementation of the failed-attempt spacing/give-up policy that would have to be rewritten.",
+      "why_cross_repo": "TanStack Query computes the geometric-with-cap delay in packages/query-core/src/retryer.ts (defaultRetryDelay = Math.min(1000 * 2 ** failureCount, 30000) :49-50; shouldRetry/failureCount++ give-up logic :169-186). RTK Query hand-rolls its own copy in packages/toolkit/src/query/retry.ts (defaultBackoff :26-33 with Math.min(attempt, maxRetries) and jittered doubling ~~((Math.random()+0.4)*(300<<attempts))). TanStack DB's offline outbox has a third implementation split across packages/offline-transactions/src/retry/BackoffCalculator.ts (Math.min(1000 * Math.pow(2, retryCount), 60000) + jitter :9-11) and packages/offline-transactions/src/retry/RetryPolicy.ts (calculateDelay :14-15, shouldRetry enforcing maxRetries :18-23). Same behavioral contract written three times; deriving the wait from elapsed time instead of attempt count forces edits in each repo's delay-and-give-up site.",
+      "grep_resistance": "Avoids retryer, retryDelay, defaultRetryDelay, backoff, defaultBackoff, BackoffCalculator, RetryPolicy, maxRetries, jitter, failureCount. Phrased purely behaviorally ('pause grows geometrically', 'clamped to a maximum ceiling', 'stops retrying', 'fuzz the wait'), so grepping the question's nouns will not surface the three implementations.",
+      "min_repos": 3,
+      "min_files": 4,
+      "expected": [
+        {
+          "repo": "query",
+          "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431",
+          "files": [
+            "packages/query-core/src/retryer.ts"
+          ]
+        },
+        {
+          "repo": "redux-toolkit",
+          "knowledgeId": "5129210f7edc89d624231a57a3b76770",
+          "files": [
+            "packages/toolkit/src/query/retry.ts"
+          ]
+        },
+        {
+          "repo": "db",
+          "knowledgeId": "659659a1-0515-4ae1-92a9-1961c8c10abe",
+          "files": [
+            "packages/offline-transactions/src/retry/BackoffCalculator.ts",
+            "packages/offline-transactions/src/retry/RetryPolicy.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 6,
+        "tokens": {
+          "contentTokens": 11155,
+          "billedInput": 107865,
+          "output": 800
+        },
+        "costUsd": 0.5593,
+        "costUsdFable5": 1.1187,
+        "retrievalTimeSeconds": 0.0018,
+        "estimatedAgentSeconds": 23.0
+      }
+    },
+    {
+      "id": "xrepo-v5-13-listed-input-recompute-cache-timing",
+      "question": "Across these libraries there is a recurring one-slot cache that guards an expensive derived computation: instead of hashing arguments, it holds onto the previous set of inputs as an ordered list and, on each call, walks that list position-by-position doing a reference check; only if the length differs or some slot points at a new object does it re-run the producer, otherwise it hands back the frozen prior output. Several of them also expose an opt-in instrumentation channel around this gate — one prints a color-coded elapsed-milliseconds badge tagged by a human-readable key only when a dev flag is on, another increments separately-resettable counters for how often the input list was re-gathered versus how often the producer actually fired, and a third emits a dev warning when the list changes size between renders. Suppose we change the shape of that ordered-input gate — say the element-wise reference test becomes a supplied comparator, or the instrumentation hook's signature changes. Which files implement this list-of-inputs recompute barrier and its timing/recount hook, and would all need to move together?",
+      "why_cross_repo": "TanStack Table implements the barrier in packages/table-core/src/utils.ts (memo(): newDeps.some((dep,i)=>deps[i]!==dep) gate + opts.debug() console.info timing badge :136-197; getMemoOptions wires the debug flag/key :199-219), consumed by every derived row model, e.g. packages/table-core/src/utils/getCoreRowModel.ts and getSortedRowModel.ts via getMemoOptions(table.options,'debugTable',...). reselect implements the identical ordered-input reference gate in src/lruMemoize.ts (createCacheKeyComparator/areArgumentsShallowlyEqual length-then-index loop :105-124; lruMemoize with resultsCount :188-245) and the input-list assembly plus recomputations/dependencyRecomputations counters in src/createSelectorCreator.ts (:385-461). react implements the canonical version in packages/react-reconciler/src/ReactFiberHooks.js (areHookInputsEqual length check + is(nextDeps[i],prevDeps[i]) loop with the dev length-mismatch warning :453-499, feeding useMemo/useCallback). Distinct from the weakMapMemoize case: this targets the positional input-list gate and its timing/recount instrumentation, not the WeakMap-keyed cache.",
+      "grep_resistance": "Avoids memo, memoize, lruMemoize, getMemoOptions, areHookInputsEqual, useMemo, recomputations, deps, and 'dependency array'. Everything is framed behaviorally ('ordered list of inputs walked position-by-position', 'frozen prior output', 'color-coded elapsed-milliseconds badge', 'separately-resettable counters', 'dev warning when the list changes size') — descriptions of runtime behavior, not identifiers.",
+      "min_repos": 3,
+      "min_files": 6,
+      "expected": [
+        {
+          "repo": "table",
+          "knowledgeId": "08e0b828-ac04-4dce-8e73-eb2ceb151072",
+          "files": [
+            "packages/table-core/src/utils.ts",
+            "packages/table-core/src/utils/getCoreRowModel.ts",
+            "packages/table-core/src/utils/getSortedRowModel.ts"
+          ]
+        },
+        {
+          "repo": "reselect",
+          "knowledgeId": "2d8056b4-75b0-5442-b99d-b9762703683b",
+          "files": [
+            "src/lruMemoize.ts",
+            "src/createSelectorCreator.ts"
+          ]
+        },
+        {
+          "repo": "react",
+          "knowledgeId": "2a9d1614-943b-44ad-b7cf-edda2f37ddf9",
+          "files": [
+            "packages/react-reconciler/src/ReactFiberHooks.js"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 6,
+        "tokens": {
+          "contentTokens": 57037,
+          "billedInput": 245511,
+          "output": 800
+        },
+        "costUsd": 1.2476,
+        "costUsdFable5": 2.4951,
+        "retrievalTimeSeconds": 0.0018,
+        "estimatedAgentSeconds": 23.0
+      }
+    },
+    {
+      "id": "xrepo-v5-14-value-or-prev-callback-state-slot",
+      "question": "A convention shows up in all of these libraries: a writable piece of state whose write API accepts two interchangeable shapes — either a bare replacement value, or a callback that is handed the current value and returns the next one. At the write site each library does a runtime typeof-function fork: if it's a function it invokes it against the previous snapshot to derive the new value, otherwise it takes the argument as-is. Critically, the owner of that state may live outside the component that renders it — one library lets you hand ownership of the whole state bag to an external listener while still defaulting to internally-held state, and its React binding forwards the very same value-or-callback argument straight through into the framework's own setter so a caller can control just a subset. Another applies the same fork when you write into a keyed cache entry, running your callback against the previously-cached datum. If we tightened or widened the accepted shapes of this writer (e.g. added an async producer form, or passed a second argument to the callback), which files defining or applying this value-or-previous-callback convention would have to change in lockstep?",
+      "why_cross_repo": "TanStack Table defines the convention as Updater<T> = T | ((old:T)=>T) and OnChangeFn in packages/table-core/src/types.ts (:130-131), applies it in packages/table-core/src/utils.ts (functionalUpdate typeof-function fork, makeStateUpdater :81-100), threads it through the external-owner path in packages/table-core/src/core/table.ts (setState/setOptions calling functionalUpdate, onStateChange :359-373); the React adapter packages/react-table/src/index.tsx forwards the same updater into React's useState setter and merges user-controlled state (:57-95). TanStack Query re-declares the identical Updater and functionalUpdate in packages/query-core/src/utils.ts (:83-104) and applies it against the cached datum in packages/query-core/src/queryClient.ts (setQueryData -> functionalUpdate(updater, prevData) :174-198). zustand implements the same fork in src/vanilla.ts (setState: typeof partial === 'function' ? partial(state) : partial :66-79). xyflow relies on the React-flavored form in packages/react/src/hooks/useNodesEdgesState.ts (setNodes((nds)=>applyNodeChanges(changes,nds)) :49-66). Widening the writer's accepted shapes forces coordinated edits across table, query, zustand and xyflow.",
+      "grep_resistance": "Withholds Updater, functionalUpdate, makeStateUpdater, setState, onStateChange, setQueryData, SetStateAction, partial. Describes only the runtime contract ('bare replacement value or a callback handed the current value', 'runtime typeof-function fork', 'owner may live outside the component', 'callback run against the previously-cached datum').",
+      "min_repos": 4,
+      "min_files": 8,
+      "expected": [
+        {
+          "repo": "table",
+          "knowledgeId": "08e0b828-ac04-4dce-8e73-eb2ceb151072",
+          "files": [
+            "packages/table-core/src/types.ts",
+            "packages/table-core/src/utils.ts",
+            "packages/table-core/src/core/table.ts",
+            "packages/react-table/src/index.tsx"
+          ]
+        },
+        {
+          "repo": "query",
+          "knowledgeId": "0c574639-1088-4233-a793-3a4397e6c431",
+          "files": [
+            "packages/query-core/src/utils.ts",
+            "packages/query-core/src/queryClient.ts"
+          ]
+        },
+        {
+          "repo": "zustand",
+          "knowledgeId": "035d8cb2-942a-5d88-b3d5-6fadafbb3f99",
+          "files": [
+            "src/vanilla.ts"
+          ]
+        },
+        {
+          "repo": "xyflow",
+          "knowledgeId": "6f1f2a40-aa51-4fe1-b9d2-d33ee4571368",
+          "files": [
+            "packages/react/src/hooks/useNodesEdgesState.ts"
+          ]
+        }
+      ],
+      "benchmark": {
+        "model": "claude-opus-4-8",
+        "cacheAssumption": "none (no cache read/write; full context re-billed every turn)",
+        "pricingUsdPerMtok": {
+          "input": 5.0,
+          "output": 25.0
+        },
+        "retrievalMethod": "structural: per-repo listing + package entry hop + expected files",
+        "agentTurns": 7,
+        "tokens": {
+          "contentTokens": 26674,
+          "billedInput": 180159,
+          "output": 900
+        },
+        "costUsd": 0.9233,
+        "costUsdFable5": 1.8466,
+        "retrievalTimeSeconds": 0.0016,
+        "estimatedAgentSeconds": 26.5
+      }
+    }
+  ],
+  "totals": {
+    "cases": 14,
+    "billedInputTokens": 2381287,
+    "outputTokens": 12600,
+    "costUsdOpus48": 12.22,
+    "costUsdFable5": 24.44,
+    "estimatedAgentWallClockSeconds": 371,
+    "note": "Grep-free agentic retrieval, no prompt caching. Opus 4.8 = $5/$25 per Mtok; Claude Fable 5 = $10/$50 per Mtok (there is no 'Opus 5' — Fable 5 is the Claude 5 family flagship). With prompt caching the Opus cost drops roughly 4x."
+  }
+}

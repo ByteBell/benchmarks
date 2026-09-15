@@ -33,7 +33,7 @@ ROSTER = [
     ("redux", "3aa561f9fc13f3287e6d83764f85fe0e82437c5f"),
     ("redux-toolkit", "b1c5130154c454ca8387f55da6122fcb507c560c"),
     ("react-redux", "ad5d1e0816d0cb1464b25cf2853f2a7d73433f5b"),
-    ("reselect", "8d87c27b75f55883629be75d1eae1c27832d907a"),
+    ("reselect", "950112a328f71d97d18fd543159d6fdefa432b38"),
     ("redux-thunk", "184205d49f707c6f203269e0d39ad85824801816"),
     ("react", "3a717e42438afac81020cdec297dadb5613a4304"),
     ("jotai", "5c4ca26b0db5571114be58393e17854a771f7790"),
@@ -110,6 +110,16 @@ DENY = ["Bash", "Read", "Write", "Edit", "Grep", "Glob", "WebFetch", "WebSearch"
 
 
 def surface_of(arm):
+    # This builder emits `claude -p` launchers ONLY. Arms for another runner
+    # (opencode_*) carry a surface name in their folder too -- e.g.
+    # opencode_hy4preview_mcp_plumbline contains "plumbline" -- so a bare
+    # substring match claims them and overwrites their run.sh with a claude
+    # launcher pointed at claude-opus-5, silently discarding both the runner
+    # and the operator's chosen model. That happened to all 17 opencode arms
+    # on 2026-09-10 and left opencode.json / extract_ranked.py orphaned beside
+    # a run.sh that never reads them. Own only what this builder generates.
+    if not arm.startswith("claudecli_"):
+        return None
     for s in ("graphify", "serena", "turbovec", "plumbline"):
         if s in arm:
             return s

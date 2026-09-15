@@ -34,7 +34,7 @@ ROSTER = {
     "redux":          ("3aa561f9fc13f3287e6d83764f85fe0e82437c5f", "c0c638c58b7d1844702ea4c7f14c62db"),
     "redux-toolkit":  ("b1c5130154c454ca8387f55da6122fcb507c560c", "5129210f7edc89d624231a57a3b76770"),
     "react-redux":    ("ad5d1e0816d0cb1464b25cf2853f2a7d73433f5b", "874bb764335b006f6e1f2df028475246"),
-    "reselect":       ("8d87c27b75f55883629be75d1eae1c27832d907a", "6441bad69fdf49c97f726d5ea467c1f8"),
+    "reselect":       ("950112a328f71d97d18fd543159d6fdefa432b38", "2d8056b4-75b0-5442-b99d-b9762703683b"),
     "redux-thunk":    ("184205d49f707c6f203269e0d39ad85824801816", "d4803d2763e3433edc5c92f7d7619c03"),
     "react":          ("3a717e42438afac81020cdec297dadb5613a4304", "2a9d1614-943b-44ad-b7cf-edda2f37ddf9"),
     "jotai":          ("5c4ca26b0db5571114be58393e17854a771f7790", "581a242e-3f4c-45db-8e84-c69cf159ac44"),
@@ -46,6 +46,16 @@ ROSTER = {
     "tldraw":         ("5590d14d8edd4faab7dc1177b6e1adb28876fd23", "91b23c56-1aee-5c86-a34b-c66f8970d025"),
     "redux-devtools": ("f4b4668c30ae08920c59a76cc4629c35c16ef0fa", "2d9528990f33c5f5e3ee7442fbfe04a4"),
     "router":         ("3dee5b2e9453d01a3172c73426959007b290b3fc", "328fd1db-0faf-59bd-b628-c446e782693a"),
+    # Added 2026-09-15. These two are in the live v7 roster (build_prompts.py) and are gold
+    # repos for xrepo-v7-6, but were missing here — so every specsite build silently reported
+    # "no page" for them, which reads as an index-coverage gap when it is a roster omission.
+    # Pin and knowledgeId both confirmed against roll_call; the pins equal the index tips.
+    "primitives":     ("58164e06ca67dff9a68dd375d858180cfdc8ec27", "d7776710-b2ba-56bc-90f3-29821aad2d81"),
+    "zod":            ("912f0f51b0ced654d0069741e7160834dca742ee", "94e564f9-74f5-573e-96ff-06cd48e2f0a0"),
+    # redux-thunk is NOT in the live v7 roster and roll_call does not list it at all, so the
+    # graph holds no knowledge for it and no pin can make it yield a page. Its entry is left
+    # here, already equal to its checkout HEAD, purely so an older case referencing it still
+    # resolves; it is dead weight for v7 and can be dropped once nothing reads it.
 }
 
 # Why a requested path has no page, keyed by the scan-manifest `kind` the fetcher reports.

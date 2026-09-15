@@ -39,6 +39,24 @@ fi
 [ -f "$PROMPT" ] || { echo "FAIL: no prompt file in $ARMDIR"; exit 1; }
 [ -f "$MCP" ] || { echo "FAIL: no MCP config at $MCP (override with MCP_CONFIG=)"; exit 1; }
 
+# ROSTER GATE. The prompt hands the arm a table of 16 repos at pinned commits; if the
+# index cannot serve one of them, the run scores against a repo the arm could never
+# reach, and nothing downstream can tell that apart from the arm searching badly.
+# manifest.json drifted exactly this way — five roster repos absent, one knowledgeId
+# that existed nowhere — so the check is done against the LIVE index, every run, and
+# is not something anyone has to remember.
+#
+# Exit 2 is "server did not answer": that is a reason to stop, not to proceed blind,
+# because an unreachable index looks identical to an empty one from inside the arm.
+# SKIP_ROSTER_GATE=1 is for replaying an arm offline against artifacts already on disk.
+if [ "${SKIP_ROSTER_GATE:-0}" != "1" ]; then
+  python3 "$(dirname "$0")/refresh_roster.py" || {
+    echo "FAIL: roster gate — the live index does not match the prompt's repo table."
+    echo "      Fix the index or the prompt before spending a run. SKIP_ROSTER_GATE=1 overrides."
+    exit 1
+  }
+fi
+
 # One attempt per arm: a re-attempt is a warm run against a case already seen.
 # Check ranked.json and result.json too — older arms were finalized without a
 # raw_response.json, and keying on that alone would silently overwrite an answer.
@@ -70,7 +88,10 @@ elif [ $FRESH -eq 1 ]; then
 fi
 
 mkdir -p "$ARMDIR"
-export DISABLE_PROMPT_CACHING=1
+# Caching left ON (2026-09-14, by request): DISABLE_PROMPT_CACHING=1 was forcing every
+# turn to re-send full history at full input price — ~5x the bill for the same work.
+# Set DISABLE_PROMPT_CACHING=1 in the environment to restore the cold-run condition.
+: "${DISABLE_PROMPT_CACHING:=0}"; export DISABLE_PROMPT_CACHING
 
 # Named tool by tool: a bare prefix does not gate reliably, and a run that silently
 # gains Bash or Grep is a bare-arm run wearing this label.
@@ -86,8 +107,60 @@ ALLOW="$ALLOW,Write"   # the prompt requires commands.log / output.log / raw_res
 # because this list anticipated it. Loosen the whitelist and it is an open door to the checkout.
 DENY="Bash,Monitor,Read,Edit,Grep,Glob,WebFetch,WebSearch,Task,NotebookEdit,BashOutput,KillShell"
 
+# ---------------------------------------------------------------- sandbox (default ON)
+# Until 2026-09-14 this runner applied NO kernel sandbox at all: the per-arm sandbox.sb
+# was written by _tools/build_arm_plumbline.py (which builds an arm named `plumbline_mcp`)
+# and nothing ever invoked it, so isolation rested entirely on --disallowedTools. That is
+# a whitelist on the model, not a guarantee about the process. Take it at the kernel too.
+#
+# The profile is generated here with ABSOLUTE paths — sandbox-exec does NOT expand `~` in
+# a (subpath ...), so a tilde silently turns the gold-blinding deny into a no-op.
+# The one re-opened path is mcp_plumbline.json: the CLI itself must read it to bind the
+# server, and the blanket deny would otherwise kill the run with EPERM before turn one.
+# Redirections are opened by THIS shell, outside the sandbox, so the deny on file-write*
+# does not stop raw_response.json / stderr.log from being written.
+#
+# Set NO_SANDBOX=1 to reproduce a pre-2026-09-14 run under the old conditions.
+BENCH_ABS=$(cd "$(dirname "$0")" && pwd)
+case "$MCP" in /*) MCP_ABS="$MCP" ;; *) MCP_ABS="$BENCH_ABS/$MCP" ;; esac
+# Per-arm, not shared: concurrent runs would otherwise race on one profile file, and a
+# reader hitting it mid-rewrite gets a truncated profile and a silently broken sandbox.
+SLUG=$(echo "${CASE}_${ARM}" | tr -c 'A-Za-z0-9._-' '_')
+PROFILE="${TMPDIR:-/tmp}/plumbline_arm.${SLUG}.sb"
+cat > "$PROFILE" <<SBEOF
+(version 1)
+(allow default)
+(deny file-read* (subpath "$BENCH_ABS"))
+(allow file-read* (literal "$MCP_ABS"))
+(deny file-write* (subpath "$BENCH_ABS"))
+(deny file-read* (subpath "$HOME/.claude/projects"))
+(deny file-read* (subpath "$HOME/.claude/history.jsonl"))
+SBEOF
+
+: "${NO_SANDBOX:=0}"
+if [ "$NO_SANDBOX" = "1" ]; then
+  SBX=()
+  echo "WARNING: NO_SANDBOX=1 — running unsandboxed (pre-2026-09-14 conditions)"
+else
+  # Gate both ways before spending anything: gold must be unreadable AND the MCP config
+  # must still be readable. A profile that fails either way is a broken measurement, and
+  # the failure is silent — an unreadable config yields a 0-byte raw_response.json.
+  sandbox-exec -f "$PROFILE" /bin/cat "$CASE/golden.json" >/dev/null 2>&1 \
+    && { echo "FAIL: SANDBOX LEAK — golden.json is readable under $PROFILE"; exit 1; }
+  sandbox-exec -f "$PROFILE" /bin/cat "$MCP_ABS" >/dev/null 2>&1 \
+    || { echo "FAIL: sandbox denies $MCP — the CLI could not bind the MCP server"; exit 1; }
+  SBX=(sandbox-exec -f "$PROFILE")
+  echo "sandbox: $PROFILE (gold denied, MCP config readable)"
+fi
+
+# cwd is a neutral directory OUTSIDE the benchmark tree. It used to be the case dir, which
+# the deny above makes unreadable — the CLI probes its cwd for project settings, so leaving
+# it inside a denied tree invites failures unrelated to the measurement.
+RUNCWD="${TMPDIR:-/tmp}/plumbline-run/${SLUG}"
+mkdir -p "$RUNCWD"
+
 ST=$(date +%s)
-( cd "$CASE" && claude -p "$(cat "$OLDPWD/$PROMPT")" \
+( cd "$RUNCWD" && "${SBX[@]}" claude -p "$(cat "$OLDPWD/$PROMPT")" \
     --model claude-opus-5 \
     --mcp-config "$OLDPWD/$MCP" --strict-mcp-config \
     --allowedTools "$ALLOW" --disallowedTools "$DENY" \

@@ -7,7 +7,7 @@ actually used keeps a new arm's prompt from drifting from the rest of the series
 """
 import json, os, re, sys
 
-ROOT = '/Users/sauravverma/programs/benchmarks/react-ecosystem'
+ROOT = '~/programs/benchmarks/react-ecosystem'
 SRC_SHA = 'f66fffd13b0bb1828248bc89c687e23a7481a40a'
 SRC = f'{ROOT}/cal.com.processed/{SRC_SHA}/claudecli_opus5_mcp_turbovec/run_prompt.txt'
 

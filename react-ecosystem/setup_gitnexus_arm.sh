@@ -2,7 +2,7 @@
 # Prepare one cal.com case for a gitnexus arm: per-case registry, MCP config, prompt.
 #   ./setup_gitnexus_arm.sh <sha>
 set -e
-ROOT=/Users/sauravverma/programs/benchmarks/react-ecosystem
+ROOT=~/programs/benchmarks/react-ecosystem
 SHA="${1:?sha}"
 CASE=$ROOT/cal.com.processed/$SHA
 ARM=$CASE/claudecli_opus5_mcp_gitnexus

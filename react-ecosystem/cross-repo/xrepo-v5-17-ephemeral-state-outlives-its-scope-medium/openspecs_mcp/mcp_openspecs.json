@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "openspecs-index": {
-      "type": "http",
-      "url": "http://localhost/mcp?access_token=${OPENSPECS_MCP_TOKEN}"
-    }
-  }
-}

@@ -4,7 +4,7 @@ artifacts listed, list cap from bench_config. Arm folders are discovered, never
 invented."""
 import json, glob, os, sys
 
-ROOT = '/Users/sauravverma/programs/benchmarks/react-ecosystem'
+ROOT = '~/programs/benchmarks/react-ecosystem'
 sys.path.insert(0, ROOT)
 from bench_config import RANKED_LIST_CAP
 

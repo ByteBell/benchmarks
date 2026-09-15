@@ -4,7 +4,7 @@ REPOSITORY:  calcom/cal.com
 COMMIT:      ab4eff1fe104ed9bd164524167c7882c55473816
 CHECKOUT:    cal.com/ab4eff1fe104ed9bd164524167c7882c55473816/repo
              All paths in this prompt are relative to the benchmark root
-             (/Users/sauravverma/programs/benchmarks/react-ecosystem). The checkout is the repository at exactly the
+             (~/programs/benchmarks/react-ecosystem). The checkout is the repository at exactly the
              commit above - do not use any other revision, and do not use outside
              knowledge of the project's later history.
 

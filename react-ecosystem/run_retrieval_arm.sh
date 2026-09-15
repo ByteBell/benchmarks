@@ -61,6 +61,24 @@ case "$SURFACE" in
     ALLOW=$(printf "mcp__turbovector__%s," "${T[@]}"); ALLOW="${ALLOW%,},Write"
     DENY="Bash,Monitor,Read,Edit,Grep,Glob,WebFetch,WebSearch,Task,NotebookEdit,BashOutput,KillShell"
     ;;
+  serena)
+    MCP="${MCP_CONFIG:-$IDX/serena_mcp/mcp_serena.json}"
+    # Read-only retrieval surface. activate_project is REQUIRED here and is not needed by
+    # any other surface: serena is single-project by construction, the cross-repo roster is
+    # 15 separate projects, and without it the arm can only ever see whichever one happens
+    # to be active. get_current_config is what lets it discover the other 14 by name.
+    T=(activate_project get_current_config list_dir find_file read_file get_symbols_overview
+       find_symbol find_referencing_symbols find_declaration find_implementations
+       search_for_pattern)
+    ALLOW=$(printf "mcp__serena__%s," "${T[@]}"); ALLOW="${ALLOW%,},Write"
+    # execute_shell_command is serena's own Bash and would make this a bare arm wearing
+    # serena's label — it can grep the tree and read golden.json. It is excluded by the
+    # allow-list above (a whitelist), and named here so that stays deliberate rather than
+    # incidental. Same for the write/refactor tools (create_text_file, replace_*, insert_*,
+    # rename_symbol, safe_delete_symbol) and the memory tools, which persist state across
+    # runs and would leak one case's findings into the next.
+    DENY="Bash,Monitor,Read,Edit,Grep,Glob,WebFetch,WebSearch,Task,NotebookEdit,BashOutput,KillShell"
+    ;;
   gitnexus)
     # MCP_CONFIG is REQUIRED here, unlike the other surfaces, and there is no default
     # on purpose. gitnexus resolves repositories through a registry, and every cal.com
@@ -165,7 +183,10 @@ mkdir -p "$ARMDIR"
 # Headless `-p` with caching disabled: the RUN CONDITIONS require a fresh session with
 # cost and cache accounted for. An interactive session starts warm and writes no
 # cost.json, which is what made the 2026-09-09 f66fffd1 run not-comparable.
-export DISABLE_PROMPT_CACHING=1
+# Caching left ON (2026-09-14, by request): DISABLE_PROMPT_CACHING=1 was forcing every
+# turn to re-send full history at full input price — ~5x the bill for the same work.
+# Set DISABLE_PROMPT_CACHING=1 in the environment to restore the cold-run condition.
+: "${DISABLE_PROMPT_CACHING:=0}"; export DISABLE_PROMPT_CACHING
 
 MCPARGS=()
 [ -n "$MCP" ] && MCPARGS=(--mcp-config "$MCP")
@@ -183,8 +204,32 @@ if [ -n "$DRYRUN" ]; then
   exit 0
 fi
 
+# --- kernel-enforced gold blindness -----------------------------------------
+# The run cds into $CASE, where golden.json sits. The BARE arm holds Read/Grep/Glob/Bash,
+# so "do not read golden.json" in the prompt is an instruction, not a control — the arm
+# can simply read the answer and score 1.0. The older per-arm run.sh files wrapped every
+# run in sandbox-exec (their cost.json records gold_readable: false); generalising them
+# into this script dropped that, leaving the canonical path weaker than what it replaced.
+# Restored here: when the arm carries a sandbox.sb, the run happens inside it.
+SANDBOX=()
+RUNCWD="$CASE"
+if [ -f "$ARMDIR/sandbox.sb" ]; then
+  SANDBOX=(/usr/bin/sandbox-exec -f "${ARMDIR:A}/sandbox.sb")
+  # The profile denies the whole benchmark tree, and a process cannot run in a directory
+  # it may not read: with cwd=$CASE every sandboxed run died as `pwd: .: Operation not
+  # permitted`, surfacing only as "unknown error" and a zero-byte raw_response.json.
+  # The per-arm run.sh files this script replaced used a fresh empty directory outside the
+  # tree (their cost.json says so: "cwd was a fresh empty directory"); that is restored here.
+  RUNCWD="/tmp/xrepo-runs/$(basename "$CASE")-$ARM"
+  rm -rf "$RUNCWD"; mkdir -p "$RUNCWD"
+  echo "isolation: sandbox-exec, profile $ARMDIR/sandbox.sb (cwd $RUNCWD)"
+else
+  echo "WARNING: no sandbox.sb in $ARMDIR — gold is readable from the run's cwd."
+  echo "         For the bare arm that is disqualifying; add a profile before trusting the score."
+fi
+
 ST=$(date +%s)
-( cd "$CASE" && claude -p "$(cat "$PROMPT")" \
+( cd "$RUNCWD" && "${SANDBOX[@]}" claude -p "$(cat "$PROMPT")" \
     --model claude-opus-5 \
     "${MCPARGS[@]}" --strict-mcp-config \
     --setting-sources "" --disable-slash-commands \
